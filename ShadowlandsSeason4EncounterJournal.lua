@@ -131,13 +131,13 @@ f:SetScript("OnEvent", function(self, event, addonName)
                         return nil
                     end
                 elseif selectedDungeon == "Lower" then
-                    if index > 4 then
+                    if index > 6 then
                         includedEncounterIDs[encounterID] = nil
                         return nil
                     end
                 elseif selectedDungeon == "Upper" then
-                    if index < 5 then
-                        index = index + 4
+                    if index < 7 then
+                        index = index + 6
                     else
                         includedEncounterIDs[encounterID] = nil
                         return nil
@@ -146,7 +146,9 @@ f:SetScript("OnEvent", function(self, event, addonName)
             end
             
             encounterID = select(3, oEJ_GetEncounterInfoByIndex(index, ...))
-            includedEncounterIDs[encounterID] = true
+            if encounterID then
+                includedEncounterIDs[encounterID] = true
+            end
             return oEJ_GetEncounterInfoByIndex(index, ...)
         end
         
