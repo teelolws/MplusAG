@@ -82,6 +82,11 @@ f:SetScript("OnEvent", function(self, event, addonName)
                         local name = self.name:GetText()
                         EncounterJournalEncounterFrameInfoInstanceTitle:SetText("Season 4 - "..name)
                         EncounterJournalNavBarButton2:SetText("Season 4 - "..name)
+                        
+                        -- make it wider for Grimrail and Docks
+                        if selectedDungeon and not ((selectedDungeon == "Streets") or (selectedDungeon == "Gambit") or (selectedDungeon == "Junkyard") or (selectedDungeon == "Workshop") or (selectedDungeon == "Lower") or (selectedDungeon == "Upper")) then
+                            EncounterJournalNavBarButton2:SetWidth(EncounterJournalNavBarButton2:GetWidth()+60)
+                        end
                     end
                     
                     for i = 1, 8 do
