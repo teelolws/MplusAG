@@ -17,6 +17,8 @@ f:SetScript("OnEvent", function(self, event, addonName)
             selectedDungeon = nil
         end)
         
+        local includedEncounterIDs = {}
+        
         local function EncounterJournal_TierDropDown_Select(self, tier)
             dropDownOptionSelected = true
             UIDropDownMenu_SetText(EncounterJournal.instanceSelect.tierDropDown, "Season 4")
@@ -90,6 +92,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
                         local e = button:GetScript("OnClick")
                         button:SetScript("OnClick", function(self)
                             selectedDungeon = self.name:GetText()
+                            wipe(includedEncounterIDs)
                             e(self)
                             buttonHandler(self)
                         end)
@@ -98,42 +101,53 @@ f:SetScript("OnEvent", function(self, event, addonName)
             end
         end 
         
-        local o = EJ_GetEncounterInfoByIndex
+        local oEJ_GetEncounterInfoByIndex = EJ_GetEncounterInfoByIndex
         function EJ_GetEncounterInfoByIndex(index, ...)
+            local encounterID = select(3, oEJ_GetEncounterInfoByIndex(index, ...))
+            
             if selectedDungeon then
                 if selectedDungeon == "Streets" then
                     if index > 5 then
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
                 elseif selectedDungeon == "Gambit" then
                     if index < 4 then
                         index = index + 5
                     else
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
                 elseif selectedDungeon == "Junkyard" then
                     if index > 4 then
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
                 elseif selectedDungeon == "Workshop" then
                     if index < 5 then
                         index = index + 4
                     else
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
                 elseif selectedDungeon == "Lower" then
                     if index > 4 then
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
                 elseif selectedDungeon == "Upper" then
                     if index < 5 then
                         index = index + 4
                     else
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
                 end
             end
-            return o(index, ...)
+            
+            encounterID = select(3, oEJ_GetEncounterInfoByIndex(index, ...))
+            includedEncounterIDs[encounterID] = true
+            return oEJ_GetEncounterInfoByIndex(index, ...)
         end
         
         hooksecurefunc("EJTierDropDown_Initialize", function(self, level)
@@ -153,6 +167,39 @@ f:SetScript("OnEvent", function(self, event, addonName)
                 EncounterJournal_TierDropDown_Select()
             end
         end)
+        
+        local oEJ_GetNumLoot = EJ_GetNumLoot
+        local oGetLootInfoByIndex = C_EncounterJournal.GetLootInfoByIndex
+        local loot = {}
+        function EJ_GetNumLoot()
+            wipe(loot)
+            local r = oEJ_GetNumLoot()
+            if not selectedDungeon then return r end
+            if not ((selectedDungeon == "Streets") or (selectedDungeon == "Gambit") or (selectedDungeon == "Junkyard") or (selectedDungeon == "Workshop") or (selectedDungeon == "Lower") or (selectedDungeon == "Upper")) then
+                return r
+            end
+            
+            for i = 1, r do
+                local itemInfo = oGetLootInfoByIndex(i)
+                
+                if (includedEncounterIDs[itemInfo.encounterID]) then
+                    table.insert(loot, itemInfo)
+                end
+            end
+            return #loot
+        end
+        
+        function C_EncounterJournal.GetLootInfoByIndex(index, encounterIndex)
+            if encounterIndex then
+                return oGetLootInfoByIndex(index, encounterIndex)
+            end
+            
+            if (not selectedDungeon) or (not ((selectedDungeon == "Streets") or (selectedDungeon == "Gambit") or (selectedDungeon == "Junkyard") or (selectedDungeon == "Workshop") or (selectedDungeon == "Lower") or (selectedDungeon == "Upper"))) then
+                return oGetLootInfoByIndex(index, encounterIndex)
+            end
+            
+            return loot[index]
+        end
 
     end
 end)
