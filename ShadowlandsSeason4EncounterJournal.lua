@@ -142,11 +142,13 @@ f:SetScript("OnEvent", function(self, event, addonName)
                         includedEncounterIDs[encounterID] = nil
                         return nil
                     end
+                else
+                    return oEJ_GetEncounterInfoByIndex(index, ...)
                 end
+                encounterID = select(3, oEJ_GetEncounterInfoByIndex(index, ...))
+                includedEncounterIDs[encounterID] = true
             end
             
-            encounterID = select(3, oEJ_GetEncounterInfoByIndex(index, ...))
-            includedEncounterIDs[encounterID] = true
             return oEJ_GetEncounterInfoByIndex(index, ...)
         end
         
