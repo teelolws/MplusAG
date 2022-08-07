@@ -1,4 +1,5 @@
-if GetBuildInfo() ~= "9.2.5" then return end -- addon obsolete in Dragonflight!
+local isShadowlandsSeason4 = C_MythicPlus.GetCurrentSeasonValues() == 8
+if not isShadowlandsSeason4 then return end -- addon obsolete once the season is over!
 
 local doOnce = true
 
