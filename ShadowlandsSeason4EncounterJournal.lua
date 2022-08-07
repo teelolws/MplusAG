@@ -7,7 +7,13 @@ f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, event, addonName)
     if addonName == "Blizzard_EncounterJournal" then
 
-        
+        local STREETS = C_ChallengeMode.GetMapUIInfo(391)
+        local GAMBIT = C_ChallengeMode.GetMapUIInfo(392)
+        local JUNKYARD = C_ChallengeMode.GetMapUIInfo(369)
+        local WORKSHOP = C_ChallengeMode.GetMapUIInfo(370)
+        local LOWERKARA = C_ChallengeMode.GetMapUIInfo(227)
+        local UPPERKARA = C_ChallengeMode.GetMapUIInfo(234)
+
         
         local dropDownOptionSelected = false
         local selectedDungeon = nil
@@ -21,7 +27,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
         
         local function EncounterJournal_TierDropDown_Select(self, tier)
             dropDownOptionSelected = true
-            UIDropDownMenu_SetText(EncounterJournal.instanceSelect.tierDropDown, "Season 4")
+            UIDropDownMenu_SetText(EncounterJournal.instanceSelect.tierDropDown, SL_SEASON_NUMBER:format(4))
             
             if EncounterJournal.selectedTab == 2 then -- dungeons
                 function updateButton(mapID, instanceButton)
@@ -43,24 +49,24 @@ f:SetScript("OnEvent", function(self, event, addonName)
                 
                 -- Tazavesh
                 updateButton(1989, EncounterJournalInstanceSelectScrollFrameScrollChildInstanceButton1)
-                EncounterJournalInstanceSelectScrollFrameScrollChildInstanceButton1.name:SetText("Streets")
-                
+                EncounterJournalInstanceSelectScrollFrameScrollChildInstanceButton1.name:SetText(STREETS)
+
                 updateButton(1989, EncounterJournalInstanceSelectScrollFrameinstance2)
-                EncounterJournalInstanceSelectScrollFrameinstance2.name:SetText("Gambit")
+                EncounterJournalInstanceSelectScrollFrameinstance2.name:SetText(GAMBIT)
                 
                 -- Mechagon
                 updateButton(1490, EncounterJournalInstanceSelectScrollFrameinstance3)
-                EncounterJournalInstanceSelectScrollFrameinstance3.name:SetText("Junkyard")
+                EncounterJournalInstanceSelectScrollFrameinstance3.name:SetText(JUNKYARD)
                 
                 updateButton(1490, EncounterJournalInstanceSelectScrollFrameinstance4)
-                EncounterJournalInstanceSelectScrollFrameinstance4.name:SetText("Workshop")
+                EncounterJournalInstanceSelectScrollFrameinstance4.name:SetText(WORKSHOP)
                 
                 -- Karazhan
                 updateButton(809, EncounterJournalInstanceSelectScrollFrameinstance5)
-                EncounterJournalInstanceSelectScrollFrameinstance5.name:SetText("Lower")
+                EncounterJournalInstanceSelectScrollFrameinstance5.name:SetText(LOWERKARA)
                 
                 updateButton(809, EncounterJournalInstanceSelectScrollFrameinstance6)
-                EncounterJournalInstanceSelectScrollFrameinstance6.name:SetText("Upper")
+                EncounterJournalInstanceSelectScrollFrameinstance6.name:SetText(UPPERKARA)
                 
                 -- Grimrail Depot
                 updateButton(606, EncounterJournalInstanceSelectScrollFrameinstance7)
@@ -80,13 +86,11 @@ f:SetScript("OnEvent", function(self, event, addonName)
                     local function buttonHandler(self)
                         if not dropDownOptionSelected then return end
                         local name = self.name:GetText()
-                        EncounterJournalEncounterFrameInfoInstanceTitle:SetText("Season 4 - "..name)
-                        EncounterJournalNavBarButton2:SetText("Season 4 - "..name)
+                        EncounterJournalEncounterFrameInfoInstanceTitle:SetText(SL_SEASON_NUMBER:format(4).." - "..name)
+                        EncounterJournalNavBarButton2:SetText(SL_SEASON_NUMBER:format(4).." - "..name)
                         
-                        -- make it wider for Grimrail and Docks
-                        if selectedDungeon and not ((selectedDungeon == "Streets") or (selectedDungeon == "Gambit") or (selectedDungeon == "Junkyard") or (selectedDungeon == "Workshop") or (selectedDungeon == "Lower") or (selectedDungeon == "Upper")) then
-                            EncounterJournalNavBarButton2:SetWidth(EncounterJournalNavBarButton2:GetWidth()+60)
-                        end
+                        -- make it wider
+                        EncounterJournalNavBarButton2:SetWidth(EncounterJournalNavBarButton2:GetWidth() + 200)
                     end
                     
                     for i = 1, 8 do
@@ -111,52 +115,40 @@ f:SetScript("OnEvent", function(self, event, addonName)
             local encounterID = select(3, oEJ_GetEncounterInfoByIndex(index, ...))
             
             if selectedDungeon then
-                if selectedDungeon == "Streets" then
+                if selectedDungeon == STREETS then
                     if index > 5 then
-                        if encounterID then
-                            includedEncounterIDs[encounterID] = nil
-                        end
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
-                elseif selectedDungeon == "Gambit" then
+                elseif selectedDungeon == GAMBIT then
                     if index < 4 then
                         index = index + 5
                     else
-                        if encounterID then
-                            includedEncounterIDs[encounterID] = nil
-                        end
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
-                elseif selectedDungeon == "Junkyard" then
+                elseif selectedDungeon == JUNKYARD then
                     if index > 4 then
-                        if encounterID then
-                            includedEncounterIDs[encounterID] = nil
-                        end
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
-                elseif selectedDungeon == "Workshop" then
+                elseif selectedDungeon == WORKSHOP then
                     if index < 5 then
                         index = index + 4
                     else
-                        if encounterID then
-                            includedEncounterIDs[encounterID] = nil
-                        end
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
-                elseif selectedDungeon == "Lower" then
+                elseif selectedDungeon == LOWERKARA then
                     if index > 6 then
-                        if encounterID then
-                            includedEncounterIDs[encounterID] = nil
-                        end
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
-                elseif selectedDungeon == "Upper" then
+                elseif selectedDungeon == UPPERKARA then
                     if index < 7 then
                         index = index + 6
                     else
-                        if encounterID then
-                            includedEncounterIDs[encounterID] = nil
-                        end
+                        includedEncounterIDs[encounterID] = nil
                         return nil
                     end
                 else
@@ -175,7 +167,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
             
             local info = UIDropDownMenu_CreateInfo();
         
-        	info.text = "Season 4"
+        	info.text = SL_SEASON_NUMBER:format(4)
         	info.func = EncounterJournal_TierDropDown_Select
         	info.checked = dropDownOptionSelected
         	info.arg1 = nil
@@ -195,7 +187,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
             wipe(loot)
             local r = oEJ_GetNumLoot()
             if not selectedDungeon then return r end
-            if not ((selectedDungeon == "Streets") or (selectedDungeon == "Gambit") or (selectedDungeon == "Junkyard") or (selectedDungeon == "Workshop") or (selectedDungeon == "Lower") or (selectedDungeon == "Upper")) then
+            if not ((selectedDungeon == STREETS) or (selectedDungeon == GAMBIT) or (selectedDungeon == JUNKYARD) or (selectedDungeon == WORKSHOP) or (selectedDungeon == LOWERKARA) or (selectedDungeon == UPPERKARA)) then
                 return r
             end
             
@@ -214,7 +206,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
                 return oGetLootInfoByIndex(index, encounterIndex)
             end
             
-            if (not selectedDungeon) or (not ((selectedDungeon == "Streets") or (selectedDungeon == "Gambit") or (selectedDungeon == "Junkyard") or (selectedDungeon == "Workshop") or (selectedDungeon == "Lower") or (selectedDungeon == "Upper"))) then
+            if (not selectedDungeon) or (not ((selectedDungeon == STREETS) or (selectedDungeon == GAMBIT) or (selectedDungeon == JUNKYARD) or (selectedDungeon == WORKSHOP) or (selectedDungeon == LOWERKARA) or (selectedDungeon == UPPERKARA))) then
                 return oGetLootInfoByIndex(index, encounterIndex)
             end
             
