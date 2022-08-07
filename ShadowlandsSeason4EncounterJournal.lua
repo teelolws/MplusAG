@@ -113,38 +113,50 @@ f:SetScript("OnEvent", function(self, event, addonName)
             if selectedDungeon then
                 if selectedDungeon == "Streets" then
                     if index > 5 then
-                        includedEncounterIDs[encounterID] = nil
+                        if encounterID then
+                            includedEncounterIDs[encounterID] = nil
+                        end
                         return nil
                     end
                 elseif selectedDungeon == "Gambit" then
                     if index < 4 then
                         index = index + 5
                     else
-                        includedEncounterIDs[encounterID] = nil
+                        if encounterID then
+                            includedEncounterIDs[encounterID] = nil
+                        end
                         return nil
                     end
                 elseif selectedDungeon == "Junkyard" then
                     if index > 4 then
-                        includedEncounterIDs[encounterID] = nil
+                        if encounterID then
+                            includedEncounterIDs[encounterID] = nil
+                        end
                         return nil
                     end
                 elseif selectedDungeon == "Workshop" then
                     if index < 5 then
                         index = index + 4
                     else
-                        includedEncounterIDs[encounterID] = nil
+                        if encounterID then
+                            includedEncounterIDs[encounterID] = nil
+                        end
                         return nil
                     end
                 elseif selectedDungeon == "Lower" then
                     if index > 6 then
-                        includedEncounterIDs[encounterID] = nil
+                        if encounterID then
+                            includedEncounterIDs[encounterID] = nil
+                        end
                         return nil
                     end
                 elseif selectedDungeon == "Upper" then
                     if index < 7 then
                         index = index + 6
                     else
-                        includedEncounterIDs[encounterID] = nil
+                        if encounterID then
+                            includedEncounterIDs[encounterID] = nil
+                        end
                         return nil
                     end
                 else
