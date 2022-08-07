@@ -1,0 +1,5 @@
+package-as: ShadowlandsSeason4EncounterJournal
+
+ignore:
+ - LICENCE.md
+ - README.md
