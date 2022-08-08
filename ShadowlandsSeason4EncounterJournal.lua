@@ -212,6 +212,13 @@ f:SetScript("OnEvent", function(self, event, addonName)
             
             return loot[index]
         end
+        
+        -- when the EJ is opened back up again, if the custom option was previously selected, select it again
+        EncounterJournal:HookScript("OnShow", function()
+            if dropDownOptionSelected then
+                EncounterJournal_TierDropDown_Select()
+            end
+        end)
 
     end
 end)
