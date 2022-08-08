@@ -1,7 +1,7 @@
 ## Interface: 90205
 ## Title: Shadowlands Season 4 Encounter Journal
 ## Author: Teelo - Jubei'thos (US)
-## Version: 9.2.5-006
+## Version: 9.2.5-007
 ## Notes: Adds Shadowlands Season 4 Option to Encounter Journal
 ## X-Curse-Project-ID: 655714
 ShadowlandsSeason4EncounterJournal.lua
