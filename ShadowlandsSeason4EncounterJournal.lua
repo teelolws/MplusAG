@@ -151,8 +151,6 @@ f:SetScript("OnEvent", function(self, event, addonName)
                         includedEncounterIDs[encounterID] = nil
                         return nil
                     end
-                else
-                    return oEJ_GetEncounterInfoByIndex(index, ...)
                 end
                 encounterID = select(3, oEJ_GetEncounterInfoByIndex(index, ...))
                 if encounterID then
@@ -187,14 +185,27 @@ f:SetScript("OnEvent", function(self, event, addonName)
             wipe(loot)
             local r = oEJ_GetNumLoot()
             if not selectedDungeon then return r end
-            if not ((selectedDungeon == STREETS) or (selectedDungeon == GAMBIT) or (selectedDungeon == JUNKYARD) or (selectedDungeon == WORKSHOP) or (selectedDungeon == LOWERKARA) or (selectedDungeon == UPPERKARA)) then
-                return r
-            end
+            --if not ((selectedDungeon == STREETS) or (selectedDungeon == GAMBIT) or (selectedDungeon == JUNKYARD) or (selectedDungeon == WORKSHOP) or (selectedDungeon == LOWERKARA) or (selectedDungeon == UPPERKARA)) then
+             --   return r
+            --end
             
             for i = 1, r do
                 local itemInfo = oGetLootInfoByIndex(i)
                 
-                if (includedEncounterIDs[itemInfo.encounterID]) then
+                if (includedEncounterIDs[itemInfo.encounterID]) and itemInfo then
+                    if itemInfo.link and not ((selectedDungeon == STREETS) or (selectedDungeon == GAMBIT)) then
+                        -- Kara
+                        itemInfo.link = itemInfo.link:gsub("::23:1:3524:1:28:1180:", "::87:8:8252:8765:6652:7749:8136:8116:3164:6646:1:28:1180:")
+                        
+                        -- Grimrail
+                        itemInfo.link = itemInfo.link:gsub("::23:1:3524:1:28:1193:", "::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:")
+                        
+                        -- Iron docks
+                        itemInfo.link = itemInfo.link:gsub("::23:1:3524:1:28:1192:", "::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:")
+                        
+                        -- Mechagon
+                        itemInfo.link = itemInfo.link:gsub("::23:1:3524:1:28:1264:", "::33:7:8280:8765:8136:8138:6652:3136:6646:1:28:464:")
+                    end
                     table.insert(loot, itemInfo)
                 end
             end
@@ -206,16 +217,26 @@ f:SetScript("OnEvent", function(self, event, addonName)
                 return oGetLootInfoByIndex(index, encounterIndex)
             end
             
-            if (not selectedDungeon) or (not ((selectedDungeon == STREETS) or (selectedDungeon == GAMBIT) or (selectedDungeon == JUNKYARD) or (selectedDungeon == WORKSHOP) or (selectedDungeon == LOWERKARA) or (selectedDungeon == UPPERKARA))) then
+            if (not selectedDungeon) then
                 return oGetLootInfoByIndex(index, encounterIndex)
             end
             
             return loot[index]
         end
         
+        -- when the EJ is closed, clear all custom settings
+        local restore
+        EncounterJournal:HookScript("OnHide", function()
+            restore = dropDownOptionSelected
+            dropDownOptionSelected = nil
+            selectedDungeon = nil
+        end)
+                
+        
         -- when the EJ is opened back up again, if the custom option was previously selected, select it again
         EncounterJournal:HookScript("OnShow", function()
-            if dropDownOptionSelected then
+            if restore then
+                dropDownOptionSelected = true
                 EncounterJournal_TierDropDown_Select()
             end
         end)
