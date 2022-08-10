@@ -4,5 +4,3 @@ A relatively light addon that adds an extra Drop Down option to the Encounter Jo
  
 
 In order to show higher level versions of the loot, it makes some minor changes to Blizzards functions. When you're done looking at the loot, for smooth gameplay, you may want to /reload before you go off to do other stuff. To minimise changes to Blizzards functions, expect some oddities from the Drop Down Menu like seeing two options selected. The background will stay as the last expansion you selected. Etc.
-
-![image](https://user-images.githubusercontent.com/49792789/182742177-7c833303-4322-4e9f-b7b8-5706a009e659.png)
