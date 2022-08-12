@@ -1,5 +1,4 @@
-local isShadowlandsSeason4 = C_MythicPlus.GetCurrentSeasonValues() == 8
-if not isShadowlandsSeason4 then return end -- addon obsolete once the season is over!
+ if not ((GetBuildInfo() == "9.2.5") or (GetBuildInfo() == "9.2.7")) then return end -- addon obsolete in Dragonflight!
 
 local SlotFilterToSlotName = {
 	[Enum.ItemSlotFilterType.Head] = INVTYPE_HEAD,
@@ -300,6 +299,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
                 EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:Hide()
                 EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle:Hide()
                 EncounterJournalEncounterFrameInfoDifficulty:Hide()
+                C_Timer.After(0.1, function() EncounterJournalEncounterFrameInfoDifficulty:Hide() end)
                 
                 local dungeonTable = lootTable.Grimrail
                 if selectedDungeon == IRONDOCKS then dungeonTable = lootTable.IronDocks end
@@ -361,8 +361,10 @@ f:SetScript("OnEvent", function(self, event, addonName)
         
         -- when the EJ is closed, clear all custom settings
         local restore
+        local restore2
         EncounterJournal:HookScript("OnHide", function()
             restore = dropDownOptionSelected
+            restore2 = selectedDungeon
             dropDownOptionSelected = nil
             selectedDungeon = nil
         end)
@@ -371,7 +373,8 @@ f:SetScript("OnEvent", function(self, event, addonName)
         -- when the EJ is opened back up again, if the custom option was previously selected, select it again
         EncounterJournal:HookScript("OnShow", function()
             if restore then
-                dropDownOptionSelected = true
+                dropDownOptionSelected = restore
+                selectedDungeon = restore2
                 EncounterJournal_TierDropDown_Select()
             end
         end)
