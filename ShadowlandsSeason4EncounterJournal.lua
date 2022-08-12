@@ -1,6 +1,107 @@
 local isShadowlandsSeason4 = C_MythicPlus.GetCurrentSeasonValues() == 8
 if not isShadowlandsSeason4 then return end -- addon obsolete once the season is over!
 
+local SlotFilterToSlotName = {
+	[Enum.ItemSlotFilterType.Head] = INVTYPE_HEAD,
+	[Enum.ItemSlotFilterType.Neck] = INVTYPE_NECK,
+	[Enum.ItemSlotFilterType.Shoulder] = INVTYPE_SHOULDER,
+	[Enum.ItemSlotFilterType.Cloak] = INVTYPE_CLOAK,
+	[Enum.ItemSlotFilterType.Chest] = INVTYPE_CHEST,
+	[Enum.ItemSlotFilterType.Wrist] = INVTYPE_WRIST,
+	[Enum.ItemSlotFilterType.Hand] = INVTYPE_HAND,
+	[Enum.ItemSlotFilterType.Waist] = INVTYPE_WAIST,
+	[Enum.ItemSlotFilterType.Legs] = INVTYPE_LEGS,
+	[Enum.ItemSlotFilterType.Feet] = INVTYPE_FEET,
+	[Enum.ItemSlotFilterType.MainHand] = INVTYPE_WEAPONMAINHAND,
+	[Enum.ItemSlotFilterType.OffHand] = INVTYPE_WEAPONOFFHAND,
+	[Enum.ItemSlotFilterType.Finger] = INVTYPE_FINGER,
+	[Enum.ItemSlotFilterType.Trinket] = INVTYPE_TRINKET,
+	[Enum.ItemSlotFilterType.Other] = EJ_LOOT_SLOT_FILTER_OTHER,
+}
+
+-- loot table from https://www.wowhead.com/news/list-of-currently-confirmed-loot-drops-from-season-4-mythic-grimrail-depot-iron-328237
+local lootTable = {
+    Grimrail = {
+        [109866] = true,
+        [109846] = true,
+    	[109972] = true,
+    	[109932] = true,
+    	[109901] = true,
+    	[109869] = true,
+    	[109978] = true,
+    	[109937] = true,
+    	[109897] = true,
+    	[109934] = true,
+    	[109983] = true,
+    	[109890] = true,
+    	[109942] = true,
+    	[109895] = true,
+    	[109988] = true,
+    	[109840] = true,
+    	[109821] = true,
+    	[109946] = true,
+    	[110052] = true,
+    	[110053] = true,
+    	[110054] = true,
+    	[110051] = true,
+    	[109996] = true,
+    	[110001] = true,
+    },
+    IronDocks = {
+        [109881] = true,
+        [109903] = true,
+        [109948] = true,
+        [109979] = true,
+        [109885] = true,
+        [109875] = true,
+        [109887] = true,
+        [109980] = true,
+        [109939] = true,
+        [109879] = true,
+        [109859] = true,
+        [109802] = true,
+        [109822] = true,
+        [110058] = true,
+        [110056] = true,
+        [110055] = true,
+        [110057] = true,
+        [110059] = true,
+        [110060] = true,
+        [110017] = true,
+        [110002] = true,
+        [109997] = true,
+    },
+}
+
+
+-- red text detection code from: https://authors.curseforge.com/forums/world-of-warcraft/general-chat/lua-code-discussion/224910-detect-wether-a-class-can-use-an-item#c1
+local scanningTooltip = CreateFrame('GameTooltip', 'Season4EncounterJournalScanningTooltip')
+scanningTooltip:AddFontStrings(
+    scanningTooltip:CreateFontString( "$parentTextLeft1", nil, "GameTooltipText" ),
+    scanningTooltip:CreateFontString( "$parentTextRight1", nil, "GameTooltipText" )
+)
+scanningTooltip:SetOwner(UIParent, "ANCHOR_NONE")
+local function IsTextRed(text)
+  if text and text:GetText() then
+    local r,g,b = text:GetTextColor()
+    return math.floor(r*256) == 255 and math.floor(g*256) == 32 and math.floor(b*256) == 32
+  end
+end
+local function SetItemHandler(self)
+  local tooltipName = self:GetName()
+  local name, link = self:GetItem()
+  self.usable = true
+  for i = 1, self:NumLines() do
+    if IsTextRed(_G[tooltipName..'TextLeft'..i]) or IsTextRed(_G[tooltipName..'TextRight'..i]) then
+      self.usable = false
+      break
+    end
+  end
+  self:Hide()
+end
+scanningTooltip:SetScript('OnTooltipSetItem', SetItemHandler)
+
+
 local doOnce = true
 
 local f = CreateFrame("Frame")
@@ -14,6 +115,8 @@ f:SetScript("OnEvent", function(self, event, addonName)
         local WORKSHOP = C_ChallengeMode.GetMapUIInfo(370)
         local LOWERKARA = C_ChallengeMode.GetMapUIInfo(227)
         local UPPERKARA = C_ChallengeMode.GetMapUIInfo(234)
+        local GRIMRAIL = "" -- language dependent, but will leave as original journal name, not M+ name
+        local IRONDOCKS = ""
 
         
         local dropDownOptionSelected = false
@@ -71,9 +174,11 @@ f:SetScript("OnEvent", function(self, event, addonName)
                 
                 -- Grimrail Depot
                 updateButton(606, EncounterJournalInstanceSelectScrollFrameinstance7)
+                GRIMRAIL = EncounterJournalInstanceSelectScrollFrameinstance7.name:GetText()
                 
                 -- Iron Docks
                 updateButton(595, EncounterJournalInstanceSelectScrollFrameinstance8)
+                IRONDOCKS = EncounterJournalInstanceSelectScrollFrameinstance8.name:GetText()
                 
                 for i = 9, 20 do
                     local button = _G["EncounterJournalInstanceSelectScrollFrameinstance"..i]
@@ -183,12 +288,46 @@ f:SetScript("OnEvent", function(self, event, addonName)
         local oGetLootInfoByIndex = C_EncounterJournal.GetLootInfoByIndex
         local loot = {}
         function EJ_GetNumLoot()
+            if EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle then EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:Show() end
+            if EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle then EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle:Show() end
+            if EncounterJournalEncounterFrameInfoDifficulty then EncounterJournalEncounterFrameInfoDifficulty:Show() end
+            
             wipe(loot)
             local r = oEJ_GetNumLoot()
             if not selectedDungeon then return r end
-            --if not ((selectedDungeon == STREETS) or (selectedDungeon == GAMBIT) or (selectedDungeon == JUNKYARD) or (selectedDungeon == WORKSHOP) or (selectedDungeon == LOWERKARA) or (selectedDungeon == UPPERKARA)) then
-             --   return r
-            --end
+            
+            if (selectedDungeon == GRIMRAIL) or (selectedDungeon == IRONDOCKS) then
+                EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:Hide()
+                EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle:Hide()
+                EncounterJournalEncounterFrameInfoDifficulty:Hide()
+                
+                local dungeonTable = lootTable.Grimrail
+                if selectedDungeon == IRONDOCKS then dungeonTable = lootTable.IronDocks end
+                
+                local itemInfo = oGetLootInfoByIndex(1)
+                if itemInfo.link then
+                    for itemID in pairs(lootTable.Grimrail) do
+                        scanningTooltip:SetHyperlink("item:"..itemID)
+                        if scanningTooltip.usable then
+                            
+                            local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID, bindType, expacID, setID, isCraftingReagent = GetItemInfo(itemID) 
+                            itemInfo.link = "|cffa335ee|Hitem:"..itemID.."::::::::60:64::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:::::|h[Thunderlord Flamestaff]|h|r"
+                            itemInfo.name = itemName
+                            for enumName, localisedName in pairs(SlotFilterToSlotName) do
+                                if _G[itemEquipLoc] == localisedName then
+                                    itemInfo.filterType = enumName
+                                end
+                            end
+                            itemInfo.icon = itemTexture
+                            itemInfo.armorType = itemType
+                            itemInfo.slot = itemSubType
+                            table.insert(loot, itemInfo)
+                        end
+                        itemInfo = oGetLootInfoByIndex(1)
+                    end
+                    return #loot
+                end
+            end
             
             for i = 1, r do
                 local itemInfo = oGetLootInfoByIndex(i)
@@ -198,15 +337,10 @@ f:SetScript("OnEvent", function(self, event, addonName)
                         -- Kara
                         itemInfo.link = itemInfo.link:gsub("::23:1:3524:1:28:1180:", "::87:8:8252:8765:6652:7749:8136:8116:3164:6646:1:28:1180:")
                         
-                        -- Grimrail
-                        itemInfo.link = itemInfo.link:gsub("::23:1:3524:1:28:1193:", "::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:")
-                        
-                        -- Iron docks
-                        itemInfo.link = itemInfo.link:gsub("::23:1:3524:1:28:1192:", "::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:")
-                        
                         -- Mechagon
                         itemInfo.link = itemInfo.link:gsub("::23:1:3524:1:28:1264:", "::33:7:8280:8765:8136:8138:6652:3136:6646:1:28:464:")
                     end
+                    
                     table.insert(loot, itemInfo)
                 end
             end
