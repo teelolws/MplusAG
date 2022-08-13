@@ -288,7 +288,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
         local loot = {}
         function EJ_GetNumLoot()
             if EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle then EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:Show() end
-            if EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle then EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle:Show() end
+            --if EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle then EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle:Show() end
             if EncounterJournalEncounterFrameInfoDifficulty then EncounterJournalEncounterFrameInfoDifficulty:Show() end
             
             wipe(loot)
@@ -297,36 +297,49 @@ f:SetScript("OnEvent", function(self, event, addonName)
             
             if (selectedDungeon == GRIMRAIL) or (selectedDungeon == IRONDOCKS) then
                 EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:Hide()
-                EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle:Hide()
+                --EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle:Hide()
                 EncounterJournalEncounterFrameInfoDifficulty:Hide()
                 C_Timer.After(0.1, function() EncounterJournalEncounterFrameInfoDifficulty:Hide() end)
                 
                 local dungeonTable = lootTable.Grimrail
                 if selectedDungeon == IRONDOCKS then dungeonTable = lootTable.IronDocks end
                 
-                local itemInfo = oGetLootInfoByIndex(1)
-                if itemInfo.link then
-                    for itemID in pairs(lootTable.Grimrail) do
-                        scanningTooltip:SetHyperlink("item:"..itemID)
-                        if scanningTooltip.usable then
-                            
-                            local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID, bindType, expacID, setID, isCraftingReagent = GetItemInfo(itemID) 
-                            itemInfo.link = "|cffa335ee|Hitem:"..itemID.."::::::::60:64::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:::::|h[Thunderlord Flamestaff]|h|r"
-                            itemInfo.name = itemName
-                            for enumName, localisedName in pairs(SlotFilterToSlotName) do
-                                if _G[itemEquipLoc] == localisedName then
-                                    itemInfo.filterType = enumName
-                                end
+                local lootIndex = 1
+                for itemID in pairs(lootTable.Grimrail) do
+                    local itemInfo = {}
+                    itemInfo = {}
+                    itemInfo.itemID = 0
+                    itemInfo.encounterID = 1133
+                    itemInfo.lootIndex = lootIndex
+                    itemInfo.displayAsPerPlayerLoot = false
+                    itemInfo.itemQuality = "ffa335ee"
+                    
+                    scanningTooltip:SetHyperlink("item:"..itemID)
+                    if scanningTooltip.usable then
+                        local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID, bindType, expacID, setID, isCraftingReagent = GetItemInfo(itemID) 
+                        itemInfo.link = "|cffa335ee|Hitem:"..itemID.."::::::::60:64::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:::::|h[Item Name Unknown]|h|r"
+                        itemInfo.name = itemName
+                        
+                        if itemEquipLoc == "INVTYPE_2HWEAPON" then itemEquipLoc = "INVTYPE_WEAPONMAINHAND" end -- no filter for 2h weapons, move them to main hand
+                        
+                        for enumName, localisedName in pairs(SlotFilterToSlotName) do
+                            if _G[itemEquipLoc] == localisedName then
+                                itemInfo.filterType = enumName
                             end
-                            itemInfo.icon = itemTexture
-                            itemInfo.armorType = itemType
-                            itemInfo.slot = itemSubType
-                            table.insert(loot, itemInfo)
                         end
-                        itemInfo = oGetLootInfoByIndex(1)
+                        itemInfo.icon = itemTexture
+                        itemInfo.armorType = itemType
+                        itemInfo.slot = itemSubType
+                        
+                        if itemInfo.filterType then
+                            if (itemInfo.filterType == C_EncounterJournal.GetSlotFilter()) or (C_EncounterJournal.GetSlotFilter() == 15) then
+                                lootIndex = lootIndex + 1
+                                table.insert(loot, itemInfo)
+                            end
+                        end
                     end
-                    return #loot
                 end
+                return #loot
             end
             
             for i = 1, r do
@@ -378,6 +391,12 @@ f:SetScript("OnEvent", function(self, event, addonName)
                 EncounterJournal_TierDropDown_Select()
             end
         end)
+        
+        local oEJ_GetNumEncountersForLootByIndex = EJ_GetNumEncountersForLootByIndex
+        function EJ_GetNumEncountersForLootByIndex(...)
+            if selectedDungeon then return 1 end
+            return oEJ_GetNumEncountersForLootByIndex(...)
+        end
 
     end
 end)
