@@ -305,11 +305,12 @@ f:SetScript("OnEvent", function(self, event, addonName)
                 if selectedDungeon == IRONDOCKS then dungeonTable = lootTable.IronDocks end
                 
                 local lootIndex = 1
-                for itemID in pairs(lootTable.Grimrail) do
+                for itemID in pairs(dungeonTable) do
                     local itemInfo = {}
                     itemInfo = {}
                     itemInfo.itemID = 0
                     itemInfo.encounterID = 1133
+                    if selectedDungeon == IRONDOCKS then itemInfo.encounterID = 1238 end
                     itemInfo.lootIndex = lootIndex
                     itemInfo.displayAsPerPlayerLoot = false
                     itemInfo.itemQuality = "ffa335ee"
@@ -336,6 +337,11 @@ f:SetScript("OnEvent", function(self, event, addonName)
                                 lootIndex = lootIndex + 1
                                 table.insert(loot, itemInfo)
                             end
+                        end
+                    else
+                        local name = GetItemInfo(itemID)
+                        if not name then
+                            table.insert(loot, itemInfo)
                         end
                     end
                 end
