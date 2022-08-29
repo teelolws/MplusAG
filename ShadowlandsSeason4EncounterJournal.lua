@@ -81,10 +81,10 @@ scanningTooltip:AddFontStrings(
 )
 scanningTooltip:SetOwner(UIParent, "ANCHOR_NONE")
 local function IsTextRed(text)
-  if text and text:GetText() then
-    local r,g,b = text:GetTextColor()
-    return math.floor(r*256) == 255 and math.floor(g*256) == 32 and math.floor(b*256) == 32
-  end
+    if text and text:GetText() then
+        local r,g,b = text:GetTextColor()
+        return math.floor(r*256) == 255 and math.floor(g*256) == 32 and math.floor(b*256) == 32
+    end
 end
 local function SetItemHandler(self)
   local tooltipName = self:GetName()
@@ -321,7 +321,8 @@ f:SetScript("OnEvent", function(self, event, addonName)
                         itemInfo.link = "|cffa335ee|Hitem:"..itemID.."::::::::60:64::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:::::|h[Item Name Unknown]|h|r"
                         itemInfo.name = itemName
                         
-                        if itemEquipLoc == "INVTYPE_2HWEAPON" then itemEquipLoc = "INVTYPE_WEAPONMAINHAND" end -- no filter for 2h weapons, move them to main hand
+                        -- all weapons use the same filter in the dungeon journal
+                        if (itemEquipLoc == "INVTYPE_2HWEAPON") or (itemEquipLoc == "INVTYPE_WEAPON") or (itemEquipLoc == "INVTYPE_RANGEDRIGHT") then itemEquipLoc = "INVTYPE_WEAPONMAINHAND" end
                         
                         for enumName, localisedName in pairs(SlotFilterToSlotName) do
                             if _G[itemEquipLoc] == localisedName then
