@@ -1,7 +1,9 @@
-## Interface: 90205
+## Interface: 90207
 ## Title: Shadowlands Season 4 Encounter Journal
+## Title-ruRU: Журнал подземелий 4-го сезона Shadowlands
 ## Author: Teelo - Jubei'thos (US)
-## Version: 9.2.5-013
+## Version: 9.2.5-014
 ## Notes: Adds Shadowlands Season 4 Option to Encounter Journal
+## Notes-ruRU: Добавляет опцию 4-й сезон Shadowlands в журнал подземелий
 ## X-Curse-Project-ID: 655714
 ShadowlandsSeason4EncounterJournal.lua
