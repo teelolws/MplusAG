@@ -1,4 +1,4 @@
- if not ((GetBuildInfo() == "9.2.5") or (GetBuildInfo() == "9.2.7")) then return end -- addon obsolete in Dragonflight!
+ if not ((GetBuildInfo() == "9.2.5") or (GetBuildInfo() == "9.2.7")) then return end -- addon requires update for Dragonflight!
 
 local SlotFilterToSlotName = {
 	[Enum.ItemSlotFilterType.Head] = INVTYPE_HEAD,
@@ -18,87 +18,96 @@ local SlotFilterToSlotName = {
 	[Enum.ItemSlotFilterType.Other] = EJ_LOOT_SLOT_FILTER_OTHER,
 }
 
+local _, currentClass = UnitClass("player")
+
+local classes = {
+    DEATHKNIGHT = 1,
+    DEMONHUNTER = 2,
+    DRUID = 3,
+    EVOKER = 4,
+    HUNTER = 5,
+    MAGE = 6,
+    MONK = 7,
+    PALADIN = 8,
+    PRIEST = 9,
+    ROGUE = 10,
+    SHAMAN = 11,
+    WARLOCK = 12,
+    WARRIOR = 13,
+}
+
+currentClass = classes[currentClass]
+
 -- loot table from https://www.wowhead.com/news/list-of-currently-confirmed-loot-drops-from-season-4-mythic-grimrail-depot-iron-328237
 local lootTable = {
     Grimrail = {
-        [109866] = true,
-        [109846] = true,
-    	[109972] = true,
-    	[109932] = true,
-    	[109901] = true,
-    	[109869] = true,
-    	[109978] = true,
-    	[109937] = true,
-    	[109897] = true,
-    	[109934] = true,
-    	[109983] = true,
-    	[109890] = true,
-    	[109942] = true,
-    	[109895] = true,
-    	[109988] = true,
-    	[109840] = true,
-    	[109821] = true,
-    	[109946] = true,
-    	[110052] = true,
-    	[110053] = true,
-    	[110054] = true,
-    	[110051] = true,
-    	[109996] = true,
-    	[110001] = true,
+        [109866] = {classes.MAGE, classes.PRIEST, classes.WARLOCK},
+        [109846] = {classes.MAGE, classes.PRIEST, classes.WARLOCK},
+    	[109972] = {classes.MAGE, classes.PRIEST, classes.WARLOCK},
+    	[109932] = {classes.MAGE, classes.PRIEST, classes.WARLOCK},
+    	[109901] = {classes.MAGE, classes.PRIEST, classes.WARLOCK},
+    	[109869] = {classes.DEMONHUNTER, classes.DRUID, classes.MONK, classes.ROGUE},
+    	[109978] = {classes.DEMONHUNTER, classes.DRUID, classes.MONK, classes.ROGUE},
+    	[109937] = {classes.DEMONHUNTER, classes.DRUID, classes.MONK, classes.ROGUE},
+    	[109897] = {classes.DEMONHUNTER, classes.DRUID, classes.MONK, classes.ROGUE},
+    	[109934] = {classes.DEMONHUNTER, classes.DRUID, classes.MONK, classes.ROGUE},
+    	[109983] = {classes.HUNTER, classes.SHAMAN},
+    	[109890] = {classes.HUNTER, classes.SHAMAN},
+    	[109942] = {classes.HUNTER, classes.SHAMAN},
+    	[109895] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR},
+    	[109988] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR},
+    	[109840] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR},
+    	[109821] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR},
+    	[109946] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR},
+    	[110052] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR}, --1h str mace
+    	[110053] = {classes.PALADIN, classes.SHAMAN, classes.WARRIOR}, -- str int shield
+    	[110054] = {classes.DRUID, classes.MAGE, classes.MONK, classes.PRIEST, classes.SHAMAN, classes.WARLOCK}, -- int staff
+    	[110051] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR}, -- 2h str axe
+    	[109996] = {classes.DEMONHUNTER, classes.DRUID, classes.HUNTER, classes.MONK, classes.ROGUE, classes.SHAMAN}, -- agi trinket
+    	[110001] = {classes.DRUID, classes.MAGE, classes.MONK, classes.PALADIN, classes.PRIEST, classes.SHAMAN, classes.WARLOCK}, -- int trinket
     },
     IronDocks = {
-        [109881] = true,
-        [109903] = true,
-        [109948] = true,
-        [109979] = true,
-        [109885] = true,
-        [109875] = true,
-        [109887] = true,
-        [109980] = true,
-        [109939] = true,
-        [109879] = true,
-        [109859] = true,
-        [109802] = true,
-        [109822] = true,
-        [110058] = true,
-        [110056] = true,
-        [110055] = true,
-        [110057] = true,
-        [110059] = true,
-        [110060] = true,
-        [110017] = true,
-        [110002] = true,
-        [109997] = true,
+        [109881] = {classes.MAGE, classes.PRIEST, classes.WARLOCK},
+        [109903] = {classes.MAGE, classes.PRIEST, classes.WARLOCK},
+        [109948] = {classes.MAGE, classes.PRIEST, classes.WARLOCK},
+        [109979] = {classes.DEMONHUNTER, classes.DRUID, classes.MONK, classes.ROGUE},
+        [109885] = {classes.DEMONHUNTER, classes.DRUID, classes.MONK, classes.ROGUE},
+        [109875] = {classes.HUNTER, classes.SHAMAN},
+        [109887] = {classes.HUNTER, classes.SHAMAN},
+        [109980] = {classes.HUNTER, classes.SHAMAN},
+        [109939] = {classes.HUNTER, classes.SHAMAN},
+        [109879] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR},
+        [109859] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR},
+        [109802] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR},
+        [109822] = {classes.DEATHKNIGHT, classes.PALADIN, classes.WARRIOR},
+        [110058] = {classes.DEMONHUNTER, classes.MONK, classes.ROGUE}, -- 1h agi fist
+        [110056] = {classes.HUNTER}, -- gun
+        [110055] = {classes.DEMONHUNTER, classes.MONK, classes.ROGUE, classes.SHAMAN}, -- 1h agi axe
+        [110057] = {classes.DRUID, classes.MONK, classes.PALADIN, classes.PRIEST, classes.SHAMAN}, -- 1h int mace
+        [110059] = {classes.DRUID, classes.HUNTER, classes.MONK}, -- 2h agi staff
+        [110060] = {classes.MAGE, classes.PRIEST, classes.WARLOCK}, -- wand
+        [110017] = {classes.DEATHKNIGHT, classes.DEMONHUNTER, classes.DRUID, classes.HUNTER, classes.MAGE, classes.MONK, classes.PALADIN, classes.PRIEST, classes.ROGUE, classes.SHAMAN, classes.WARLOCK, classes.WARRIOR}, -- vers trinket
+        [110002] = {classes.DRUID, classes.MAGE, classes.MONK, classes.PALADIN, classes.PRIEST, classes.SHAMAN, classes.WARLOCK}, -- int trinket
+        [109997] = {classes.DEMONHUNTER, classes.DRUID, classes.HUNTER, classes.MONK, classes.ROGUE, classes.SHAMAN}, -- agi trinket
     },
 }
 
-
--- red text detection code from: https://authors.curseforge.com/forums/world-of-warcraft/general-chat/lua-code-discussion/224910-detect-wether-a-class-can-use-an-item#c1
-local scanningTooltip = CreateFrame('GameTooltip', 'Season4EncounterJournalScanningTooltip')
-scanningTooltip:AddFontStrings(
-    scanningTooltip:CreateFontString( "$parentTextLeft1", nil, "GameTooltipText" ),
-    scanningTooltip:CreateFontString( "$parentTextRight1", nil, "GameTooltipText" )
-)
-scanningTooltip:SetOwner(UIParent, "ANCHOR_NONE")
-local function IsTextRed(text)
-    if text and text:GetText() then
-        local r,g,b = text:GetTextColor()
-        return math.floor(r*256) == 255 and math.floor(g*256) == 32 and math.floor(b*256) == 32
+-- simplify lootTable down to [itemid] = boolean based on the currently logged in class
+for dungeon, dungeonLoot in pairs(lootTable) do
+    for itemID, usableClasses in pairs(dungeonLoot) do
+        local change
+        for _, class in pairs(usableClasses) do
+            if currentClass == class then
+                lootTable[dungeon][itemID] = true
+                change = true
+                break
+            end
+        end
+        if not change then
+            lootTable[dungeon][itemID] = nil
+        end
     end
 end
-local function SetItemHandler(self)
-  local tooltipName = self:GetName()
-  local name, link = self:GetItem()
-  self.usable = true
-  for i = 1, self:NumLines() do
-    if IsTextRed(_G[tooltipName..'TextLeft'..i]) or IsTextRed(_G[tooltipName..'TextRight'..i]) then
-      self.usable = false
-      break
-    end
-  end
-  self:Hide()
-end
-scanningTooltip:SetScript('OnTooltipSetItem', SetItemHandler)
 
 
 local doOnce = true
@@ -130,7 +139,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
         
         local function EncounterJournal_TierDropDown_Select(self, tier)
             dropDownOptionSelected = true
-            UIDropDownMenu_SetText(EncounterJournal.instanceSelect.tierDropDown, SL_SEASON_NUMBER:format(4))
+            UIDropDownMenu_SetText(EncounterJournal.instanceSelect.tierDropDown, CHALLENGES)
             
             if EncounterJournal.selectedTab == 2 then -- dungeons
                 function updateButton(mapID, instanceButton)
@@ -191,8 +200,8 @@ f:SetScript("OnEvent", function(self, event, addonName)
                     local function buttonHandler(self)
                         if not dropDownOptionSelected then return end
                         local name = self.name:GetText()
-                        EncounterJournalEncounterFrameInfoInstanceTitle:SetText(SL_SEASON_NUMBER:format(4).." - "..name)
-                        EncounterJournalNavBarButton2:SetText(SL_SEASON_NUMBER:format(4).." - "..name)
+                        EncounterJournalEncounterFrameInfoInstanceTitle:SetText(CHALLENGES.." - "..name)
+                        EncounterJournalNavBarButton2:SetText(CHALLENGES.." - "..name)
                         
                         -- make it wider
                         EncounterJournalNavBarButton2:SetWidth(EncounterJournalNavBarButton2:GetWidth() + 200)
@@ -266,11 +275,11 @@ f:SetScript("OnEvent", function(self, event, addonName)
         end
         
         hooksecurefunc("EJTierDropDown_Initialize", function(self, level)
-        	if not (EncounterJournal.selectedTab == 2) then return end -- dungeons only, for raids just click the one marked Fated
+        	if not (EncounterJournal.selectedTab == 2) then return end -- dungeons only
             
             local info = UIDropDownMenu_CreateInfo();
         
-        	info.text = SL_SEASON_NUMBER:format(4)
+        	info.text = CHALLENGES
         	info.func = EncounterJournal_TierDropDown_Select
         	info.checked = dropDownOptionSelected
         	info.arg1 = nil
@@ -296,6 +305,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
             if not selectedDungeon then return r end
             
             if (selectedDungeon == GRIMRAIL) or (selectedDungeon == IRONDOCKS) then
+                --EJ_SetLootFilter(0, 0)
                 EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:Hide()
                 --EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle:Hide()
                 EncounterJournalEncounterFrameInfoDifficulty:Hide()
@@ -307,7 +317,6 @@ f:SetScript("OnEvent", function(self, event, addonName)
                 local lootIndex = 1
                 for itemID in pairs(dungeonTable) do
                     local itemInfo = {}
-                    itemInfo = {}
                     itemInfo.itemID = 0
                     itemInfo.encounterID = 1133
                     if selectedDungeon == IRONDOCKS then itemInfo.encounterID = 1238 end
@@ -315,33 +324,26 @@ f:SetScript("OnEvent", function(self, event, addonName)
                     itemInfo.displayAsPerPlayerLoot = false
                     itemInfo.itemQuality = "ffa335ee"
                     
-                    scanningTooltip:SetHyperlink("item:"..itemID)
-                    if scanningTooltip.usable then
-                        local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID, bindType, expacID, setID, isCraftingReagent = GetItemInfo(itemID) 
-                        itemInfo.link = "|cffa335ee|Hitem:"..itemID.."::::::::60:64::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:::::|h[Item Name Unknown]|h|r"
-                        itemInfo.name = itemName
-                        
-                        -- all weapons use the same filter in the dungeon journal
-                        if (itemEquipLoc == "INVTYPE_2HWEAPON") or (itemEquipLoc == "INVTYPE_WEAPON") or (itemEquipLoc == "INVTYPE_RANGEDRIGHT") then itemEquipLoc = "INVTYPE_WEAPONMAINHAND" end
-                        
-                        for enumName, localisedName in pairs(SlotFilterToSlotName) do
-                            if _G[itemEquipLoc] == localisedName then
-                                itemInfo.filterType = enumName
-                            end
+                    local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID, bindType, expacID, setID, isCraftingReagent = GetItemInfo(itemID) 
+                    itemInfo.link = "|cffa335ee|Hitem:"..itemID.."::::::::60:64::16:8:7359:8266:8765:8136:8117:6652:3170:6646:1:28:1279:::::|h[Item Name Unknown]|h|r"
+                    itemInfo.name = itemName
+                    
+                    -- all weapons use the same filter in the dungeon journal
+                    if (itemEquipLoc == "INVTYPE_2HWEAPON") or (itemEquipLoc == "INVTYPE_WEAPON") or (itemEquipLoc == "INVTYPE_RANGEDRIGHT") then itemEquipLoc = "INVTYPE_WEAPONMAINHAND" end
+                    
+                    for enumName, localisedName in pairs(SlotFilterToSlotName) do
+                        if _G[itemEquipLoc] == localisedName then
+                            itemInfo.filterType = enumName
                         end
-                        itemInfo.icon = itemTexture
-                        itemInfo.armorType = itemType
-                        itemInfo.slot = itemSubType
-                        
-                        if itemInfo.filterType then
-                            if (itemInfo.filterType == C_EncounterJournal.GetSlotFilter()) or (C_EncounterJournal.GetSlotFilter() == 15) then
-                                lootIndex = lootIndex + 1
-                                table.insert(loot, itemInfo)
-                            end
-                        end
-                    else
-                        local name = GetItemInfo(itemID)
-                        if not name then
+                    end
+                    if not itemInfo.filterType then itemInfo.filterType = "Unknown" end
+                    itemInfo.icon = itemTexture
+                    itemInfo.armorType = itemType
+                    itemInfo.slot = itemSubType
+                    
+                    if itemInfo.filterType then
+                        if (itemInfo.filterType == C_EncounterJournal.GetSlotFilter()) or (C_EncounterJournal.GetSlotFilter() == 15) then
+                            lootIndex = lootIndex + 1
                             table.insert(loot, itemInfo)
                         end
                     end
@@ -388,14 +390,15 @@ f:SetScript("OnEvent", function(self, event, addonName)
             dropDownOptionSelected = nil
             selectedDungeon = nil
         end)
-                
         
         -- when the EJ is opened back up again, if the custom option was previously selected, select it again
+        -- wont update until the player scrolls or clicks something
         EncounterJournal:HookScript("OnShow", function()
             if restore then
                 dropDownOptionSelected = restore
                 selectedDungeon = restore2
-                EncounterJournal_TierDropDown_Select()
+                restore = nil
+                restore2 = nil
             end
         end)
         
