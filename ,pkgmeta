@@ -1,5 +1,9 @@
 package-as: MplusAdventureGuide
 
+move-folders:
+ ShadowlandsSeason4EncounterJournal/MplusAdventureGuide: MplusAdventureGuide
+ ShadowlandsSeason4EncounterJournal/ShadowlandsSeason4EncounterJournal: ShadowlandsSeason4EncounterJournal
+
 ignore:
  - LICENCE.md
  - README.md
