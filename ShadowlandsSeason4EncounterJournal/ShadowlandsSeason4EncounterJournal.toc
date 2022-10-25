@@ -1,0 +1,6 @@
+## Interface: 100000
+## Title: S4EJ [Obsolete]
+## Author: Teelo - Jubei'thos (US)
+## Version: Obsolete
+## Notes: Addon renamed to "M+ Adventure Guide" for Dragonflight. This folder can be safely deleted.
+## X-Curse-Project-ID: 655714

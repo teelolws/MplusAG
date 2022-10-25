@@ -1,0 +1,2 @@
+mklink /j /D "C:\Users\teelo\Documents\GitHub\ShadowlandsSeason4EncounterJournal\ShadowlandsSeason4EncounterJournal" "F:\World of Warcraft\_retail_\Interface\AddOns\ShadowlandsSeason4EncounterJournal"
+mklink /j /D "C:\Users\teelo\Documents\GitHub\ShadowlandsSeason4EncounterJournal\MplusAdventureGuide" "F:\World of Warcraft\_retail_\Interface\AddOns\MplusAdventureGuide"

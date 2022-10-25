@@ -1,0 +1,8 @@
+## Interface: 100000
+## Title: Mythic+ Adventure Guide
+## Author: Teelo - Jubei'thos (US)
+## Version: 10.0.0-001
+## Notes: Adds Mythic+ Options to the Adventure Guide
+## X-Curse-Project-ID: 655714
+
+MplusAdventureGuide.lua
