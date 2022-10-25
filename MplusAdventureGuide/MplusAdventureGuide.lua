@@ -304,7 +304,7 @@ f:SetScript("OnEvent", function(self, event, addonName)
             
             if (selectedDungeon == GRIMRAIL) or (selectedDungeon == IRONDOCKS) then
                 --EJ_SetLootFilter(0, 0)
-                EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:Hide()
+                EncounterJournalEncounterFrameInfoFilterToggle:Hide()
                 --EncounterJournalEncounterFrameInfoLootScrollFrameSlotFilterToggle:Hide()
                 EncounterJournalEncounterFrameInfoDifficulty:Hide()
                 C_Timer.After(0.1, function() EncounterJournalEncounterFrameInfoDifficulty:Hide() end)
