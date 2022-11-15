@@ -1,8 +1,6 @@
-## Interface: 100000
-## Title: Mythic+ Adventure Guide
+## Interface: 100002
+## Title: Mythic+ Adventure Guide [Obsolete]
 ## Author: Teelo - Jubei'thos (US)
-## Version: 10.0.0-001
-## Notes: Adds Mythic+ Options to the Adventure Guide
+## Version: 10.0.2-002
+## Notes: This addon is now obsolete and can be safely uninstalled!
 ## X-Curse-Project-ID: 655714
-
-MplusAdventureGuide.lua
