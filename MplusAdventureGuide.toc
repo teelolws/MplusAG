@@ -1,7 +1,7 @@
 ## Interface: 100100
 ## Title: Mythic+ Adventure Guide
 ## Author: Teelo - Jubei'thos (US)
-## Version: 10.1-002
+## Version: 10.1-003
 ## Notes: Shows the Loot tab in your Encounter Journal in Dragonflight
 ## X-Curse-Project-ID: 655714
 
