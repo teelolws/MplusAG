@@ -66,22 +66,40 @@ local db = {
     },
 }
 
-local pattern = ITEM_UPGRADE_TOOLTIP_FORMAT_STRING
-pattern = pattern:gsub("%%d", "%%s")
-pattern = pattern:format("(.+)", "(%d)", "(%d)")
+local itemLevelPattern = ITEM_LEVEL
+itemLevelPattern = itemLevelPattern:gsub("%%d", "(%%d)")
+
+local upgradePattern = ITEM_UPGRADE_TOOLTIP_FORMAT_STRING
+upgradePattern = upgradePattern:gsub("%%d", "%%s")
+upgradePattern = upgradePattern:format("(.+)", "(%d)", "(%d)")
 TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(tooltip, data)
+    local found, foundLower, foundUpper
+    
     for k, v in pairs(data.lines) do
         if type(v) == "table" then
             local text = v.leftText
-            local match, _, rank, lower, upper = text:find(pattern)
+            local match, _, rank, lower, upper = text:find(upgradePattern)
             if match then
                 for _, data in pairs(db) do
                     if data[GetLocale()] and (data[GetLocale()] == rank) then 
                         if lower ~= upper then
-                            v.leftText = text.." "..DISABLED_FONT_COLOR:GenerateHexColorMarkup().."("..data.lower.."-"..data.upper..")|r"
+                            found, foundLower, foundUpper = true, data.lower, data.upper
+                            break
                         end
                     end
                 end
+                break
+            end
+        end
+    end
+    
+    if not found then return end
+    for k, v in pairs(data.lines) do
+        if type(v) == "table" then
+            local text = v.leftText
+            local match, _, itemLevel = text:find(itemLevelPattern)
+            if match then
+                v.leftText = text..DISABLED_FONT_COLOR:GenerateHexColorMarkup().."("..foundLower.."-"..foundUpper..")|r"
             end
         end
     end
