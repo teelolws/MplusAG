@@ -1,5 +1,8 @@
 package-as: MplusAdventureGuide
 
+move-folders:
+ MplusAdventureGuide/Source: MplusAdventureGuide
+
 ignore:
  - LICENCE.md
  - README.md
