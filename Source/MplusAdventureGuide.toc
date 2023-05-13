@@ -7,3 +7,4 @@
 
 loot-tab.lua
 item-upgrade.lua
+watermark.lua
