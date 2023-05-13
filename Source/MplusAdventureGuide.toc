@@ -1,8 +1,8 @@
 ## Interface: 100100
-## Title: Mythic+ Adventure Guide
+## Title: Mythic+ Gearing Conveniences
 ## Author: Teelo - Jubei'thos (US)
 ## Version: 10.1-002
-## Notes: Shows the Loot tab in your Encounter Journal in Dragonflight
+## Notes: Shows the Loot tab in your Encounter Journal in Dragonflight, as well as a few other things
 ## X-Curse-Project-ID: 655714
 
 loot-tab.lua
