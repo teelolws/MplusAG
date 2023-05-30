@@ -1,9 +1,5 @@
 EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
-    local a
     hooksecurefunc(ChallengesFrame, "Update", function()
-        if a then return end
-        a = true
-        
         local currentAffix = C_MythicPlus.GetCurrentAffixes()
         if not currentAffix then return end
         if #currentAffix == 0 then return end
