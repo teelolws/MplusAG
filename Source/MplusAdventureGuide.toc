@@ -1,5 +1,5 @@
 ## Interface: 100100
-## Title: Mythic+ Gearing Conveniences
+## Title: Mythic+ Miscellaneous
 ## Author: Teelo - Jubei'thos (US)
 ## Version: 10.1-005
 ## Notes: Shows the Loot tab in your Encounter Journal in Dragonflight, as well as a few other things
