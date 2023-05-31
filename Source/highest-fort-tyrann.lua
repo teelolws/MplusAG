@@ -21,7 +21,7 @@ EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
             local affixScores, overAllScore = C_MythicPlus.GetSeasonBestAffixScoreInfoForMap(icon.mapID)
             if (affixScores and #affixScores > 0) then
                 for _, affixInfo in ipairs(affixScores) do
-                    if (tyrannical and (affixInfo.name == "Tyrannical")) or ((not tyrannical) and (affixInfo.name == "Fortified")) then
+                    if (tyrannical and (affixInfo.name == C_ChallengeMode.GetAffixInfo(9))) or ((not tyrannical) and (affixInfo.name == C_ChallengeMode.GetAffixInfo(10))) then
                         highest:SetText("["..affixInfo.level.."]")
                         if (affixInfo.overTime) then
                             highest:SetTextColor(LIGHTGRAY_FONT_COLOR.r, LIGHTGRAY_FONT_COLOR.g, LIGHTGRAY_FONT_COLOR.b)
