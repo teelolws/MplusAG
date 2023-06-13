@@ -68,7 +68,7 @@ EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
         for i, icon in ipairs(ChallengesFrame.DungeonIcons) do
             local button = CreateFrame("Button", nil, icon, "SecureActionButtonTemplate")
             icon.MPAGPortalButton = button
-            button:SetPoint("TOP", icon, "BOTTOM")
+            button:SetPoint("BOTTOM", icon, "TOP")
             button:RegisterForClicks("LeftButtonDown", "LeftButtonUp")
             button:SetSize(40, 40)
             button:SetHighlightTexture("Interface\\Buttons\\CheckButtonHilight", "ADD")
