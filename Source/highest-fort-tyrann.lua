@@ -19,6 +19,7 @@ EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
             highest:SetScale(0.8)
 
             local affixScores, overAllScore = C_MythicPlus.GetSeasonBestAffixScoreInfoForMap(icon.mapID)
+            local wasChanged
             if (affixScores and #affixScores > 0) then
                 for _, affixInfo in ipairs(affixScores) do
                     if (tyrannical and (affixInfo.name == C_ChallengeMode.GetAffixInfo(9))) or ((not tyrannical) and (affixInfo.name == C_ChallengeMode.GetAffixInfo(10))) then
@@ -28,8 +29,12 @@ EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
                         else
                             highest:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
                         end
+                        wasChanged = true
                     end
                 end
+            end
+            if not wasChanged then
+                highest:SetText("")
             end
         end
     end)
