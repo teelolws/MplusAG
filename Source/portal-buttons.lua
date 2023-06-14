@@ -1,3 +1,5 @@
+local addonName, addon = ...
+
 -- this module adds +20 portal buttons to the M+ UI if the player has learned them
 
 -- DB structure:
@@ -59,6 +61,8 @@ local db = {
 
 local loaded = false
 EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
+    if not addon.db.profile.portalButtons then return end
+    
     hooksecurefunc(ChallengesFrame, "Update", function()
         if InCombatLockdown() then return end
         

@@ -1,4 +1,8 @@
+local addonName, addon = ...
+
 EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
+    if not addon.db.profile.highestFortTyr then return end
+    
     hooksecurefunc(ChallengesFrame, "Update", function()
         local currentAffix = C_MythicPlus.GetCurrentAffixes()
         if not currentAffix then return end
