@@ -1,6 +1,6 @@
 local addonName, addon = ...
 
-EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
+function addon:initHighestFortTyr()
     if not addon.db.profile.highestFortTyr then return end
     
     hooksecurefunc(ChallengesFrame, "Update", function()
@@ -42,4 +42,4 @@ EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
             end
         end
     end)
-end)
+end

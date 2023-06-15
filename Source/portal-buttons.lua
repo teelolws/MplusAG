@@ -60,7 +60,7 @@ local db = {
 }
 
 local loaded = false
-EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
+function addon:initPortalButtons()
     if not addon.db.profile.portalButtons then return end
     
     hooksecurefunc(ChallengesFrame, "Update", function()
@@ -129,4 +129,4 @@ EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
             end)
         end
     end)
-end)
+end

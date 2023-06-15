@@ -1,6 +1,6 @@
 local addonName, addon = ...
 
-EventUtil.ContinueOnAddOnLoaded(addonName, function()
+function addon:setupOptions()
     local defaults = {
         profile = {
             highestFortTyr = true,
@@ -58,4 +58,4 @@ EventUtil.ContinueOnAddOnLoaded(addonName, function()
     LibStub("AceConfigRegistry-3.0"):ValidateOptionsTable(options, addonName)
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, options, {"mplusadventureguide"})
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName)
-end)
+end

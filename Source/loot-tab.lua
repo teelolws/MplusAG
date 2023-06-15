@@ -1,6 +1,6 @@
 local addonName, addon = ...
 
-EventUtil.ContinueOnAddOnLoaded("Blizzard_EncounterJournal", function()
+function addon:initLootTab()
     if not addon.db.profile.lootTab then return end
     
     hooksecurefunc ("EncounterJournal_CheckAndDisplayLootTab", function()
@@ -16,4 +16,4 @@ EventUtil.ContinueOnAddOnLoaded("Blizzard_EncounterJournal", function()
             EncounterJournal_SetLootJournalView(LOOT_JOURNAL_ITEM_SETS) 
         end
     )
-end)
+end

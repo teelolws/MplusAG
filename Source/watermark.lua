@@ -1,6 +1,6 @@
 local addonName, addon = ...
 
-EventUtil.ContinueOnAddOnLoaded(addonName, function()
+function addon:initWatermark()
     if not addon.db.profile.watermark then return end
 
     for _, tbl in ipairs({PaperDollItemsFrame.EquipmentSlots, PaperDollItemsFrame.WeaponSlots}) do
@@ -36,4 +36,4 @@ EventUtil.ContinueOnAddOnLoaded(addonName, function()
             end)
         end
     end
-end)
+end
