@@ -79,12 +79,7 @@ EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
             
             local cdFrame = CreateFrame("Cooldown", nil, button, "CooldownFrameTemplate")
             cdFrame:SetAllPoints(button)
-            cdFrame:SetSwipeColor(1, 1, 1)
-             
-            local texture = button:CreateTexture(nil, "BACKGROUND")
-            texture:SetAllPoints(button)
-            texture:SetTexCoord(0.07,0.9,0.07,0.70)
-            texture:SetTexture(132242)
+            cdFrame:SetDrawEdge(false)
 
             button:HookScript("OnEnter", function()
                 GameTooltip:SetOwner(button, "ANCHOR_RIGHT")
