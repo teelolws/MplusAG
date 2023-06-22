@@ -8,6 +8,7 @@ function addon:setupOptions()
             lootTab = true,
             portalButtons = true,
             watermark = true,
+            achievementExpansionFeatures = true,
         },
     }
         
@@ -27,30 +28,42 @@ function addon:setupOptions()
                 name = "Enable Highest Fortified/Tyrannical Module",
                 set = function(info, v) addon.db.profile.highestFortTyr = v end,
                 get = function() return addon.db.profile.highestFortTyr end,
+                width = "full",
             },
             showCompleted = {
                 type = "toggle",
                 name = "Enable Item Upgrade Range Module",
                 set = function(info, v) addon.db.profile.itemUpgrade = v end,
                 get = function() return addon.db.profile.itemUpgrade end,
+                width = "full",
             },
             showEventInfo = {
                 type = "toggle",
                 name = "Enable Loot Tab Module",
                 set = function(info, v) addon.db.profile.lootTab = v end,
                 get = function() return addon.db.profile.lootTab end,
+                width = "full",
             },
             showCoordinates = {
                 type = "toggle",
                 name = "Enable Portal Buttons Module",
                 set = function(info, v) addon.db.profile.portalButtons = v end,
                 get = function() return addon.db.profile.portalButtons end,
+                width = "full",
             },
             hideZoneCaldera = {
                 type = "toggle",
                 name = "Enable Watermark Module",
                 set = function(info, v) addon.db.profile.watermark = v end,
                 get = function() return addon.db.profile.watermark end,
+                width = "full",
+            },
+            achievementExpansionFeatures = {
+                type = "toggle",
+                name = "Enable Achievements Expansion Features Module",
+                set = function(info, v) addon.db.profile.achievementExpansionFeatures = v end,
+                get = function() return addon.db.profile.achievementExpansionFeatures end,
+                width = "full",
             },
         },
     }

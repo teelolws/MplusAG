@@ -26,4 +26,5 @@ item-upgrade.lua
 watermark.lua
 highest-fort-tyrann.lua
 portal-buttons.lua
+achievement-expansion-features.lua
 init.lua
