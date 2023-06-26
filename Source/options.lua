@@ -69,7 +69,7 @@ function addon:setupOptions()
             threeAffixFix = {
                 type = "toggle",
                 name = "Enable Three Affix Fix Module",
-                set = function(info, v) addon.db.profile.threeAffixFix = v, end,
+                set = function(info, v) addon.db.profile.threeAffixFix = v end,
                 get = function() return addon.db.profile.threeAffixFix end,
                 width = "full",
             },
