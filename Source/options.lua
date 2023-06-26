@@ -9,6 +9,7 @@ function addon:setupOptions()
             portalButtons = true,
             watermark = true,
             achievementExpansionFeatures = true,
+            threeAffixFix = true,
         },
     }
         
@@ -63,6 +64,13 @@ function addon:setupOptions()
                 name = "Enable Achievements Expansion Features Module",
                 set = function(info, v) addon.db.profile.achievementExpansionFeatures = v end,
                 get = function() return addon.db.profile.achievementExpansionFeatures end,
+                width = "full",
+            },
+            threeAffixFix = {
+                type = "toggle",
+                name = "Enable Three Affix Fix Module",
+                set = function(info, v) addon.db.profile.threeAffixFix = v, end,
+                get = function() return addon.db.profile.threeAffixFix end,
                 width = "full",
             },
         },

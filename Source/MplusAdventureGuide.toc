@@ -27,4 +27,5 @@ watermark.lua
 highest-fort-tyrann.lua
 portal-buttons.lua
 achievement-expansion-features.lua
+three-affix-fix.lua
 init.lua
