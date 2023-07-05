@@ -5,7 +5,6 @@ function addon:setupOptions()
         profile = {
             highestFortTyr = true,
             itemUpgrade = true,
-            lootTab = true,
             portalButtons = true,
             watermark = true,
             achievementExpansionFeatures = true,
@@ -36,13 +35,6 @@ function addon:setupOptions()
                 name = "Enable Item Upgrade Range Module",
                 set = function(info, v) addon.db.profile.itemUpgrade = v end,
                 get = function() return addon.db.profile.itemUpgrade end,
-                width = "full",
-            },
-            showEventInfo = {
-                type = "toggle",
-                name = "Enable Loot Tab Module",
-                set = function(info, v) addon.db.profile.lootTab = v end,
-                get = function() return addon.db.profile.lootTab end,
                 width = "full",
             },
             showCoordinates = {

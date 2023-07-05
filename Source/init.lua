@@ -11,10 +11,6 @@ EventUtil.ContinueOnAddOnLoaded(addonName, function()
             addon:initThreeAffixFix()
         end)
         
-        EventUtil.ContinueOnAddOnLoaded("Blizzard_EncounterJournal", function()
-            addon:initLootTab()
-        end)
-        
         EventUtil.ContinueOnAddOnLoaded("Blizzard_AchievementUI", function()
             addon:initAchievementExpansionFeatures()
         end)

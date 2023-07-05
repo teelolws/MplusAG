@@ -1,4 +1,4 @@
-## Interface: 100100
+## Interface: 100105
 ## Title: Mythic+ Miscellaneous
 ## Author: Teelo - Jubei'thos (US)
 ## Version: 10.1-012
@@ -21,7 +21,6 @@ libs\AceGUI-3.0\AceGUI-3.0.xml
 libs\AceConfig-3.0\AceConfig-3.0.xml
 
 options.lua
-loot-tab.lua
 item-upgrade.lua
 watermark.lua
 highest-fort-tyrann.lua
