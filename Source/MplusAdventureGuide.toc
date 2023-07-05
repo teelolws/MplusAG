@@ -5,6 +5,7 @@
 ## Notes: Shows the Loot tab in your Encounter Journal in Dragonflight, as well as a few other things
 ## X-Curse-Project-ID: 655714
 ## SavedVariables: MPlusAdventureGuideADB
+## IconTexture: Interface\Icons\Spell_Mage_PresenceOfMind
 
 libs\LibStub\LibStub.lua
 libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
@@ -26,5 +27,4 @@ watermark.lua
 highest-fort-tyrann.lua
 portal-buttons.lua
 achievement-expansion-features.lua
-three-affix-fix.lua
 init.lua
