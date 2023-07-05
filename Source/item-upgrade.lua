@@ -66,6 +66,11 @@ local db = {
         lower = 428,
         upper = 441,
     },
+    myth = {
+        enUS = "Myth",
+        lower = 441,
+        upper = 447,
+    },
 }
 
 local itemLevelPattern = ITEM_LEVEL
