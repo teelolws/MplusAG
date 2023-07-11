@@ -1,10 +1,11 @@
-## Interface: 100100
+## Interface: 100105
 ## Title: Mythic+ Miscellaneous
 ## Author: Teelo - Jubei'thos (US)
 ## Version: 10.1-012
 ## Notes: Shows the Loot tab in your Encounter Journal in Dragonflight, as well as a few other things
 ## X-Curse-Project-ID: 655714
 ## SavedVariables: MPlusAdventureGuideADB
+## IconTexture: Interface\Icons\Spell_Mage_PresenceOfMind
 
 libs\LibStub\LibStub.lua
 libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
@@ -21,11 +22,9 @@ libs\AceGUI-3.0\AceGUI-3.0.xml
 libs\AceConfig-3.0\AceConfig-3.0.xml
 
 options.lua
-loot-tab.lua
 item-upgrade.lua
 watermark.lua
 highest-fort-tyrann.lua
 portal-buttons.lua
 achievement-expansion-features.lua
-three-affix-fix.lua
 init.lua

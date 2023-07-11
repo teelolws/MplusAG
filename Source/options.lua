@@ -5,11 +5,9 @@ function addon:setupOptions()
         profile = {
             highestFortTyr = true,
             itemUpgrade = true,
-            lootTab = true,
             portalButtons = true,
             watermark = true,
             achievementExpansionFeatures = true,
-            threeAffixFix = true,
         },
     }
         
@@ -38,13 +36,6 @@ function addon:setupOptions()
                 get = function() return addon.db.profile.itemUpgrade end,
                 width = "full",
             },
-            showEventInfo = {
-                type = "toggle",
-                name = "Enable Loot Tab Module",
-                set = function(info, v) addon.db.profile.lootTab = v end,
-                get = function() return addon.db.profile.lootTab end,
-                width = "full",
-            },
             showCoordinates = {
                 type = "toggle",
                 name = "Enable Portal Buttons Module",
@@ -64,13 +55,6 @@ function addon:setupOptions()
                 name = "Enable Achievements Expansion Features Module",
                 set = function(info, v) addon.db.profile.achievementExpansionFeatures = v end,
                 get = function() return addon.db.profile.achievementExpansionFeatures end,
-                width = "full",
-            },
-            threeAffixFix = {
-                type = "toggle",
-                name = "Enable Three Affix Fix Module",
-                set = function(info, v) addon.db.profile.threeAffixFix = v end,
-                get = function() return addon.db.profile.threeAffixFix end,
                 width = "full",
             },
         },
