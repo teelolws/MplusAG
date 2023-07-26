@@ -27,4 +27,5 @@ watermark.lua
 highest-fort-tyrann.lua
 portal-buttons.lua
 achievement-expansion-features.lua
+keystone-movable.lua
 init.lua
