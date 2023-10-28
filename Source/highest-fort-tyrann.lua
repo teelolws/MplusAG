@@ -13,7 +13,7 @@ function addon:initHighestFortTyr()
         local tyrannical = currentAffix == 9
         
         for i, icon in ipairs(ChallengesFrame.DungeonIcons) do
-            icon.HighestLevelFortifiedTyrannical = icon:CreateFontString(nil, "BORDER", "SystemFont_Huge1_Outline")
+            icon.HighestLevelFortifiedTyrannical = icon.HighestLevelFortifiedTyrannical or icon:CreateFontString(nil, "BORDER", "SystemFont_Huge1_Outline")
             local highest = icon.HighestLevelFortifiedTyrannical
             highest:SetJustifyH("CENTER")
             highest:SetPoint("BOTTOM", 0, 4)

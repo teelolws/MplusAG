@@ -8,6 +8,7 @@ function addon:setupOptions()
             portalButtons = true,
             watermark = true,
             achievementExpansionFeatures = true,
+            keystoneMovable = true,
         },
     }
         
@@ -55,6 +56,13 @@ function addon:setupOptions()
                 name = "Enable Achievements Expansion Features Module",
                 set = function(info, v) addon.db.profile.achievementExpansionFeatures = v end,
                 get = function() return addon.db.profile.achievementExpansionFeatures end,
+                width = "full",
+            },
+            keystoneMovable = {
+                type = "toggle",
+                name = "Enable Keystone Movable Module",
+                set = function(info, v) addon.db.profile.keystoneMovable = v end,
+                get = function() return addon.db.profile.keystoneMovable end,
                 width = "full",
             },
         },
