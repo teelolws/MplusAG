@@ -86,7 +86,7 @@ local db = {
     [198] = { -- Darkheart Thicket
         primarySpell = 424163,
         alternateSpells = {
-            205373, -- Black Rook Hold
+            424153, -- Black Rook Hold
         },
     },
     [199] = { -- Black Rook Hold
@@ -97,7 +97,9 @@ local db = {
     },
     [244] = { -- Atal'Dazar
         primarySpell = 424187,
-        alternateSpells = {},
+        alternateSpells = {
+            281404, -- Dazar'alor
+        },
     },
 }
 
