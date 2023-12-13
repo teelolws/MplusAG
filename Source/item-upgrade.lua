@@ -163,7 +163,7 @@ TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(toolt
             local text = v.leftText
             local match, _, itemLevel = text:find(itemLevelPattern)
             if match then
-                v.leftText = text..DISABLED_FONT_COLOR:GenerateHexColorMarkup().."("..foundLower.."-"..foundUpper..")|r"
+                v.leftText = text.." "..DISABLED_FONT_COLOR:GenerateHexColorMarkup().."("..foundLower.."-"..foundUpper..")|r"
             end
         end
     end
