@@ -21,6 +21,10 @@ local db = {
             lower = 415,
             upper = 437,
         },
+        season4 = {
+            lower = 454,
+            upper = 476,
+        },
     },
     adventurer = {
         enUS = "Adventurer",
@@ -41,6 +45,10 @@ local db = {
         season3 = {
             lower = 428,
             upper = 450,
+        },
+        season4 = {
+            lower = 467,
+            upper = 489,
         },
     },
     veteran = {
@@ -63,6 +71,10 @@ local db = {
             lower = 441,
             upper = 463,
         },
+        season4 = {
+            lower = 480,
+            upper = 502,
+        },
     },
     champion = {
         enUS = "Champion",
@@ -84,6 +96,10 @@ local db = {
             lower = 454,
             upper = 476,
         },
+        season4 = {
+            lower = 493,
+            upper = 515,
+        },
     },
     hero = {
         enUS = "Hero",
@@ -96,6 +112,10 @@ local db = {
         season3 = {
             lower = 467,
             upper = 483,
+        },
+        season4 = {
+            lower = 506,
+            upper = 522,
         },
     },
     myth = {
@@ -110,6 +130,10 @@ local db = {
             lower = 480,
             upper = 489,
         },
+        season4 = {
+            lower = 519,
+            upper = 528,
+        },
     },
 }
 
@@ -121,23 +145,28 @@ itemLevelPattern = itemLevelPattern:gsub("%%d", "(%%d)")
 local upgradePattern = ITEM_UPGRADE_TOOLTIP_FORMAT_STRING
 upgradePattern = upgradePattern:gsub("%%d", "%%s")
 upgradePattern = upgradePattern:format("(.+)", "(%d)", "(%d)")
+
+local function findSeasonNum(lines)
+    for seasonNum = 2, 3 do
+        local seasonString = string.format(EXPANSION_SEASON_NAME, EXPANSION_NAME9, seasonNum)
+        for k, v in pairs(lines) do
+            if type(v) == "table" then
+                if v.leftText:find(seasonString) then 
+                    return seasonNum
+                end
+            end
+        end
+    end
+    return 4
+end
+
 TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(tooltip, data)
     if not addon.db then return end
     if not addon.db.profile then return end
     if not addon.db.profile.itemUpgrade then return end
     
     local found, foundLower, foundUpper
-    
-    -- TODO: find a locale independent way to detect "Dragonflight Season 2"
-    -- checking for gray text should work for this season but its not future proof
-    local season = 3
-    for k, v in pairs(data.lines) do
-        if type(v) == "table" then 
-            if v.leftText:find(upgradePattern) and v.leftText:lower():match(DISABLED_FONT_COLOR:GenerateHexColorMarkup()) then
-                season = 2
-            end
-        end
-    end
+    local season = findSeasonNum(data.lines)
     
     for k, v in pairs(data.lines) do
         if type(v) == "table" then
