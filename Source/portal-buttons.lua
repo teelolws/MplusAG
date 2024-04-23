@@ -101,6 +101,23 @@ local db = {
             281404, -- Dazar'alor
         },
     },
+    
+    -- Dragonflight Season 4 (just adding the dungeons from Season 1, from before this module existed)
+    [400] = { -- Nokhud Offensive
+        primarySpell = 393262,
+    },
+    [401] = { -- Azure Vault
+        primarySpell = 393279,
+    },
+    [399] = { -- Ruby Life Pools
+        primarySpell = 393256,
+    },
+    [402] = { -- Algethar Academy
+        primarySpell = 393273,
+        alternateSpells = {
+            393283, -- Halls of Infusion
+        },
+    },
 }
 
 local loaded = false
