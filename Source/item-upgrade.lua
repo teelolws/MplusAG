@@ -135,6 +135,20 @@ local db = {
             upper = 528,
         },
     },
+    awakened12 = {
+        enUS = "Awakened (%d+)/12",
+        season4 = {
+            lower = 493,
+            upper = 528,
+        },
+    },
+    awakened14 = {
+        enUS = "Awakened (%d+)/14",
+        season4 = {
+            lower = 493,
+            upper = 535,
+        },
+    },
 }
 
 
@@ -144,7 +158,7 @@ itemLevelPattern = itemLevelPattern:gsub("%%d", "(%%d)")
 
 local upgradePattern = ITEM_UPGRADE_TOOLTIP_FORMAT_STRING
 upgradePattern = upgradePattern:gsub("%%d", "%%s")
-upgradePattern = upgradePattern:format("(.+)", "(%d)", "(%d)")
+upgradePattern = upgradePattern:format("(.+)", "(%d+)", "(%d+)")
 
 local function findSeasonNum(lines)
     for seasonNum = 2, 3 do
@@ -174,7 +188,7 @@ TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(toolt
             local match, _, rank, lower, upper = text:find(upgradePattern)
             if match then
                 for _, data in pairs(db) do
-                    if data[GetLocale()] and (data[GetLocale()] == rank) then 
+                    if data[GetLocale()] and ((data[GetLocale()] == rank) or ((rank.." "..lower.."/"..upper):match(data[GetLocale()]))) then 
                         if lower ~= upper then
                             found, foundLower, foundUpper = true, data["season"..season].lower, data["season"..season].upper
                             break
