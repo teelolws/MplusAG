@@ -29,4 +29,5 @@ portal-buttons.lua
 achievement-expansion-features.lua
 keystone-movable.lua
 plunderstorm-renown.lua
+acronyms.lua
 init.lua

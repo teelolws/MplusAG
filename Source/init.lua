@@ -10,6 +10,7 @@ EventUtil.ContinueOnAddOnLoaded(addonName, function()
             addon:initHighestFortTyr()
             addon:initPortalButtons()
             addon:initKeystoneMovable()
+            addon:initAcronyms()
         end)
         
         EventUtil.ContinueOnAddOnLoaded("Blizzard_AchievementUI", function()

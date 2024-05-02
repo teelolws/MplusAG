@@ -10,6 +10,7 @@ function addon:setupOptions()
             achievementExpansionFeatures = true,
             keystoneMovable = true,
             plunderstormRenown = true,
+            acronyms = false,
         },
     }
         
@@ -71,6 +72,13 @@ function addon:setupOptions()
                 name = "Enable Plunderstorm Renown Module",
                 set = function(info, v) addon.db.profile.plunderstormRenown = v end,
                 get = function() return addon.db.profile.plunderstormRenown end,
+                width = "full",
+            },
+            acronyms = {
+                type = "toggle",
+                name = "Enable Mythic+ Acronym Module",
+                set = function(info, v) addon.db.profile.acronyms = v end,
+                get = function() return addon.db.profile.acronyms end,
                 width = "full",
             },
         },
