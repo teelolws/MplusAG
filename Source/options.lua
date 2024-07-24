@@ -11,6 +11,7 @@ function addon:setupOptions()
             keystoneMovable = true,
             plunderstormRenown = true,
             acronyms = false,
+            wardrobeClassColours = true,
         },
     }
         
@@ -79,6 +80,13 @@ function addon:setupOptions()
                 name = "Enable Mythic+ Acronym Module",
                 set = function(info, v) addon.db.profile.acronyms = v end,
                 get = function() return addon.db.profile.acronyms end,
+                width = "full",
+            },
+            wardrobeClassColours = {
+                type = "toggle",
+                name = "Enable Wardrobe Class Colours Module",
+                set = function(info, v) addon.db.profile.wardrobeClassColours = v end,
+                get = function() return addon.db.profile.wardrobeClassColours end,
                 width = "full",
             },
         },

@@ -30,4 +30,5 @@ achievement-expansion-features.lua
 keystone-movable.lua
 plunderstorm-renown.lua
 acronyms.lua
+wardrobe-class-colours.lua
 init.lua
