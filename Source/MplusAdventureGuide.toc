@@ -32,5 +32,4 @@ plunderstorm-renown.lua
 acronyms.lua
 wardrobe-class-colours.lua
 warband-transferable.lua
-currency-transfer-all-button.lua
 init.lua
