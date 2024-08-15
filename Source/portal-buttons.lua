@@ -178,9 +178,9 @@ function addon:initPortalButtons()
                     local button = icon.MPAGPortalButton
                     button:SetAttribute("type", "spell")
                     button:SetAttribute("spell", spellID)
-                    local _, _, icon = GetSpellInfo(spellID)
+                    local icon = C_Spell.GetSpellInfo(spellID).iconID
                     button:SetNormalTexture(icon)
-                    local startTime, duration, _ = GetSpellCooldown(spellID)
+                    local startTime, duration = C_Spell.GetSpellCooldown(spellID).startTime, C_Spell.GetSpellCooldown(spellID).duration
                     cdFrame:SetCooldown(startTime, duration)
                     button:Show()
                 end
