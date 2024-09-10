@@ -121,6 +121,51 @@ local db = {
             393283, -- Halls of Infusion
         },
     },
+    
+    -- TWW season 1
+    [376] = { -- Necrotic Wake
+        primarySpell = 354462,
+        alternateSpells = {
+            354466, -- Spires of Ascension
+        },
+    },
+    [501] = { -- Stonevault
+        primarySpell = 442926,
+        alternateSpells = {},
+    },
+    [505] = { -- Dawnbreaker
+        primarySpell = 442931,
+        alternateSpells = {},
+    },
+    [353] = { -- Siege of Boralus
+        primarySpell = 445418,
+        alternateSpells = {
+            464256, -- Also SOB - the other faction's one
+            272270, -- Tol Dagor
+        },
+    },
+    [375] = { -- Mists of Tirna Scythe
+        primarySpell = 354464,
+        alternateSpells = {
+            354468, -- De Other Side
+        },
+    },
+    [507] = { -- Grim Batol
+        primarySpell = 445424,
+        alternateSpells = {},
+    },
+    [502] = { -- City of Threads
+        primarySpell = 442927,
+        alternateSpells = {
+            442929, -- Ara-Kara
+        },
+    },
+    [502] = { -- Ara-Kara, City of Echoes
+        primarySpell = 442929,
+        alternateSpells = {
+            442927, -- City of Threads
+        },
+    },
 }
 
 local loaded = false
