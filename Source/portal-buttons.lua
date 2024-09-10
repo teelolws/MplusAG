@@ -130,11 +130,11 @@ local db = {
         },
     },
     [501] = { -- Stonevault
-        primarySpell = 442926,
+        primarySpell = 445269,
         alternateSpells = {},
     },
     [505] = { -- Dawnbreaker
-        primarySpell = 442931,
+        primarySpell = 445414,
         alternateSpells = {},
     },
     [353] = { -- Siege of Boralus
@@ -155,15 +155,15 @@ local db = {
         alternateSpells = {},
     },
     [502] = { -- City of Threads
-        primarySpell = 442927,
+        primarySpell = 445416,
         alternateSpells = {
-            442929, -- Ara-Kara
+            445417, -- Ara-Kara
         },
     },
     [502] = { -- Ara-Kara, City of Echoes
-        primarySpell = 442929,
+        primarySpell = 445417,
         alternateSpells = {
-            442927, -- City of Threads
+            445416, -- City of Threads
         },
     },
 }
