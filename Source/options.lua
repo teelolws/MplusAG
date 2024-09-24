@@ -3,7 +3,6 @@ local addonName, addon = ...
 function addon:setupOptions()
     local defaults = {
         profile = {
-            highestFortTyr = true,
             itemUpgrade = true,
             portalButtons = true,
             watermark = true,
@@ -12,7 +11,6 @@ function addon:setupOptions()
             plunderstormRenown = true,
             acronyms = false,
             wardrobeClassColours = true,
-            warbandTransferable = true,
         },
     }
         
@@ -26,13 +24,6 @@ function addon:setupOptions()
                 type = "description",
                 fontSize = "medium",
                 order = 0,
-            },
-            highestFortTyr = {
-                type = "toggle",
-                name = "Enable Highest Fortified/Tyrannical Module",
-                set = function(info, v) addon.db.profile.highestFortTyr = v end,
-                get = function() return addon.db.profile.highestFortTyr end,
-                width = "full",
             },
             showCompleted = {
                 type = "toggle",
@@ -88,13 +79,6 @@ function addon:setupOptions()
                 name = "Enable Wardrobe Class Colours Module",
                 set = function(info, v) addon.db.profile.wardrobeClassColours = v end,
                 get = function() return addon.db.profile.wardrobeClassColours end,
-                width = "full",
-            },
-            warbandTransferable = {
-                type = "toggle",
-                name = "Enable Warband Transferable Module: Always show the 'Warband Transferable' icons on the Currency window",
-                set = function(info, v) addon.db.profile.warbandTransferable = v end,
-                get = function() return addon.db.profile.warbandTransferable end,
                 width = "full",
             },
         },

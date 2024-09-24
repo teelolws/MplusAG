@@ -7,7 +7,6 @@ EventUtil.ContinueOnAddOnLoaded(addonName, function()
     
     RunNextFrame(function()
         EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
-            addon:initHighestFortTyr()
             addon:initPortalButtons()
             addon:initKeystoneMovable()
             addon:initAcronyms()

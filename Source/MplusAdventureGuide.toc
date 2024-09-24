@@ -24,7 +24,6 @@ libs\AceConfig-3.0\AceConfig-3.0.xml
 options.lua
 item-upgrade.lua
 watermark.lua
-highest-fort-tyrann.lua
 portal-buttons.lua
 achievement-expansion-features.lua
 keystone-movable.lua
