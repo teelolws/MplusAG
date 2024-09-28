@@ -18,7 +18,7 @@ local mapToAcronym = {
     [375] = "MOTS",
     [507] = "GB",
     [502] = "COT",
-    [502] = "AK",
+    [503] = "AK",
 }
 
 function addon:initAcronyms()
