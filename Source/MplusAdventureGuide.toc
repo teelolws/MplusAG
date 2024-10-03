@@ -31,4 +31,5 @@ plunderstorm-renown.lua
 acronyms.lua
 wardrobe-class-colours.lua
 warband-transferable.lua
+delves-progress-tooltip.lua
 init.lua

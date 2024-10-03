@@ -11,6 +11,7 @@ function addon:setupOptions()
             plunderstormRenown = true,
             acronyms = false,
             wardrobeClassColours = true,
+            delvesProgressTooltip = true,
         },
     }
         
@@ -79,6 +80,13 @@ function addon:setupOptions()
                 name = "Enable Wardrobe Class Colours Module",
                 set = function(info, v) addon.db.profile.wardrobeClassColours = v end,
                 get = function() return addon.db.profile.wardrobeClassColours end,
+                width = "full",
+            },
+            delvesProgressTooltip = {
+                type = "toggle",
+                name = "Enable Delves Progress Tooltip Module",
+                set = function(info, v) addon.db.profile.delvesProgressTooltip = v end,
+                get = function() return addon.db.profile.delvesProgressTooltip end,
                 width = "full",
             },
         },
