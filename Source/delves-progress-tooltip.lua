@@ -2,8 +2,8 @@ local addonName, addon = ...
 
 -- from Blizzard_DelvesDashboardUI.lua
 local function hasActiveSeason()
-	DelvesDashboardFrame.uiDisplaySeason = C_DelvesUI.GetCurrentDelvesSeasonNumber();
-    return DelvesDashboardFrame.uiDisplaySeason and DelvesDashboardFrame.uiDisplaySeason > 0;
+	local uiDisplaySeason = C_DelvesUI.GetCurrentDelvesSeasonNumber();
+    return uiDisplaySeason and uiDisplaySeason > 0;
 end
 
 local function addTopDelveRunsToTooltip()
