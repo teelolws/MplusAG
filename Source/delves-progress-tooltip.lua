@@ -6,7 +6,7 @@ local function hasActiveSeason()
     return uiDisplaySeason and uiDisplaySeason > 0;
 end
 
-local function addTopDelveRunsToTooltip()
+local function addTopDelveRunsToTooltip(runsNeeded)
 	local activities = C_WeeklyRewards.GetActivities(Enum.WeeklyRewardChestThresholdType.World)
 	local totalMaxCompleted = 0
 	for _, activity in ipairs(activities) do
@@ -15,10 +15,10 @@ local function addTopDelveRunsToTooltip()
 		end
 	end
     
-    if totalMaxCompleted > 7 then return end
+    if totalMaxCompleted >= runsNeeded then return end
     
     GameTooltip_AddBlankLineToTooltip(GameTooltip);
-    GameTooltip_AddHighlightLine(GameTooltip, "Delves needed at Tier 8: "..(8 - totalMaxCompleted))
+    GameTooltip_AddHighlightLine(GameTooltip, "Delves needed at Tier 8: "..(runsNeeded - totalMaxCompleted))
     
     GameTooltip:Show()
 end
@@ -31,8 +31,12 @@ function addon:initDelvesProgressTooltip()
         if activity ~= WeeklyRewardsFrame.ConcessionFrame then
             hooksecurefunc(activity, "ShowIncompleteTooltip", function(self, title, description, formatRemainingProgress, addProgressLineCallback)
                 -- Check Blizzard_WeeklyRewards.lua for any important changes
-                if (description == GREAT_VAULT_REWARDS_WORLD_INCOMPLETE) or (description == GREAT_VAULT_REWARDS_WORLD_COMPLETED_FIRST) or (description == GREAT_VAULT_REWARDS_WORLD_COMPLETED_SECOND) then
-                    addTopDelveRunsToTooltip()
+                if (description == GREAT_VAULT_REWARDS_WORLD_INCOMPLETE) then
+                    addTopDelveRunsToTooltip(2)
+                elseif (description == GREAT_VAULT_REWARDS_WORLD_COMPLETED_FIRST) then
+                    addTopDelveRunsToTooltip(4)
+                elseif (description == GREAT_VAULT_REWARDS_WORLD_COMPLETED_SECOND) then
+                    addTopDelveRunsToTooltip(8)
                 end
             end)
             
