@@ -42,7 +42,7 @@ function addon:initDelvesProgressTooltip()
             
             hooksecurefunc(activity, "HandlePreviewWorldRewardTooltip", function(self, itemLevel, upgradeItemLevel, nextLevel)
                 if upgradeItemLevel then
-                    addTopDelveRunsToTooltip()
+                    addTopDelveRunsToTooltip(nextLevel)
                 end
             end)
         end
