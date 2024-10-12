@@ -10,7 +10,7 @@ local function addTopDelveRunsToTooltip(runsNeeded)
 	local activities = C_WeeklyRewards.GetActivities(Enum.WeeklyRewardChestThresholdType.World)
 	local totalMaxCompleted = 0
 	for _, activity in ipairs(activities) do
-		if activity.level and (activity.level == 8) then
+		if activity.level and (activity.level >= 8) then
 			totalMaxCompleted = activity.progress
 		end
 	end
