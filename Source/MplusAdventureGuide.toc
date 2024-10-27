@@ -32,4 +32,5 @@ acronyms.lua
 wardrobe-class-colours.lua
 warband-transferable.lua
 delves-progress-tooltip.lua
+min-rating-longer.lua
 init.lua

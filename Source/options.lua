@@ -12,6 +12,7 @@ function addon:setupOptions()
             acronyms = false,
             wardrobeClassColours = true,
             delvesProgressTooltip = true,
+            minRatingLonger = true,
         },
     }
         
@@ -87,6 +88,14 @@ function addon:setupOptions()
                 name = "Enable Delves Progress Tooltip Module",
                 set = function(info, v) addon.db.profile.delvesProgressTooltip = v end,
                 get = function() return addon.db.profile.delvesProgressTooltip end,
+                width = "full",
+            },
+            minRatingLonger = {
+                type = "toggle",
+                name = "Enable Longer Minimum Rating Module",
+                desc = "Fixes a bug in the base UI preventing 'Minimum Mythic+ Rating' from being bigger than 999",
+                set = function(info, v) addon.db.profile.minRatingLonger = v end,
+                get = function() return addon.db.profile.minRatingLonger end,
                 width = "full",
             },
         },
