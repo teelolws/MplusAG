@@ -40,6 +40,7 @@ function addon.initMinRatingLonger()
     end)
     
     hooksecurefunc(LFGListFrame.SearchPanel.FilterButton, "OnMenuClosed", function(self, dropdown)
+        minRatingFrame:Hide()
         if LFGListFrame.CategorySelection.selectedCategory ~= GROUP_FINDER_CATEGORY_ID_DUNGEONS then return end
         
         local enabled = C_LFGList.GetAdvancedFilter()
