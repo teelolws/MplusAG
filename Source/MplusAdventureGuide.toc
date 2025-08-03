@@ -1,4 +1,4 @@
-## Interface: 110107
+## Interface: 110107, 110200
 ## Title: Mythic+ Miscellaneous
 ## Author: Teelo - Jubei'thos (US)
 ## Version: @project-version@
