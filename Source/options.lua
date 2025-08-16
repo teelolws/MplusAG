@@ -12,6 +12,7 @@ function addon:setupOptions()
             acronyms = false,
             wardrobeClassColours = true,
             delvesProgressTooltip = true,
+            inspectilvl = true,
         },
     }
         
@@ -87,6 +88,14 @@ function addon:setupOptions()
                 name = "Enable Delves Progress Tooltip Module",
                 set = function(info, v) addon.db.profile.delvesProgressTooltip = v end,
                 get = function() return addon.db.profile.delvesProgressTooltip end,
+                width = "full",
+            },
+            inspectilvl = {
+                type = "toggle",
+                name = "Enable Inspect Item Level Module",
+                desc = "Adds the target's item level to the Inspect UI",
+                set = function(info, v) addon.db.profile.inspectilvl = v end,
+                get = function() return addon.db.profile.inspectilvl end,
                 width = "full",
             },
         },
