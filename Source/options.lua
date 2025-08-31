@@ -13,6 +13,7 @@ function addon:setupOptions()
             wardrobeClassColours = true,
             delvesProgressTooltip = true,
             inspectilvl = true,
+            premadeFinderRedX = true,
         },
     }
         
@@ -96,6 +97,14 @@ function addon:setupOptions()
                 desc = "Adds the target's item level to the Inspect UI",
                 set = function(info, v) addon.db.profile.inspectilvl = v end,
                 get = function() return addon.db.profile.inspectilvl end,
+                width = "full",
+            },
+            premadeFinderRedX = {
+                type = "toggle",
+                name = "Enable Premade Finder Red X Module",
+                desc = "Hides that annoying Red X that appears over the Filter button but also clips over the Refresh button",
+                set = function(info, v) addon.db.profile.premadeFinderRedX = v end,
+                get = function() return addon.db.profile.premadeFinderRedX end,
                 width = "full",
             },
         },
