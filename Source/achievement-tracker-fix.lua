@@ -10,8 +10,7 @@ function addon:initAchievementTrackerFix()
         for _, entryID in ipairs(entryIDs) do
         	local id, name, points, completed = GetAchievementInfo(entryID)
         	if (not id) or completed then
-        	    C_ContentTracking.StopTracking(Enum.ContentTrackingType.Achievement, achievementID, Enum.ContentTrackingStopType.Collected)
-                print(achievementID)
+        	    C_ContentTracking.StopTracking(Enum.ContentTrackingType.Achievement, entryID, Enum.ContentTrackingStopType.Collected)
         	end
         end
     end)
