@@ -38,6 +38,7 @@ item-upgrade.lua
 watermark.lua
 portal-buttons.lua
 achievement-expansion-features.lua
+achievement-tracker-fix.lua
 keystone-movable.lua
 acronyms.lua
 wardrobe-class-colours.lua

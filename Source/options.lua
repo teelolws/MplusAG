@@ -8,6 +8,7 @@ function addon:setupOptions()
             portalButtons = true,
             watermark = true,
             achievementExpansionFeatures = true,
+            achievementTrackerFix = true,
             keystoneMovable = true,
             acronyms = false,
             wardrobeClassColours = true,
@@ -61,6 +62,13 @@ function addon:setupOptions()
                 name = "Enable Achievements Expansion Features Module",
                 set = function(info, v) addon.db.profile.achievementExpansionFeatures = v end,
                 get = function() return addon.db.profile.achievementExpansionFeatures end,
+                width = "full",
+            },
+            achievementTrackerFix = {
+                type = "toggle",
+                name = "Enable Achievement Tracker Fix Module",
+                set = function(info, v) addon.db.profile.achievementTrackerFix = v end,
+                get = function() return addon.db.profile.achievementTrackerFix end,
                 width = "full",
             },
             keystoneMovable = {
