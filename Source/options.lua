@@ -3,12 +3,18 @@ local addonName, addon = ...
 function addon:setupOptions()
     local defaults = {
         profile = {
-            highestFortTyr = true,
             itemUpgrade = true,
+            itemUpgradeOldSeasons = true,
             portalButtons = true,
             watermark = true,
             achievementExpansionFeatures = true,
+            achievementTrackerFix = true,
             keystoneMovable = true,
+            acronyms = false,
+            wardrobeClassColours = true,
+            delvesProgressTooltip = true,
+            inspectilvl = true,
+            premadeFinderRedX = true,
         },
     }
         
@@ -23,18 +29,18 @@ function addon:setupOptions()
                 fontSize = "medium",
                 order = 0,
             },
-            highestFortTyr = {
-                type = "toggle",
-                name = "Enable Highest Fortified/Tyrannical Module",
-                set = function(info, v) addon.db.profile.highestFortTyr = v end,
-                get = function() return addon.db.profile.highestFortTyr end,
-                width = "full",
-            },
-            showCompleted = {
+            itemUpgrade = {
                 type = "toggle",
                 name = "Enable Item Upgrade Range Module",
                 set = function(info, v) addon.db.profile.itemUpgrade = v end,
                 get = function() return addon.db.profile.itemUpgrade end,
+                width = "full",
+            },
+            itemUpgradeOldSeasons = {
+                type = "toggle",
+                name = "Item Upgrade Module: include old seasons (requires /reload)",
+                set = function(info, v) addon.db.profile.itemUpgradeOldSeasons = v end,
+                get = function() return addon.db.profile.itemUpgradeOldSeasons end,
                 width = "full",
             },
             showCoordinates = {
@@ -58,11 +64,55 @@ function addon:setupOptions()
                 get = function() return addon.db.profile.achievementExpansionFeatures end,
                 width = "full",
             },
+            achievementTrackerFix = {
+                type = "toggle",
+                name = "Enable Achievement Tracker Fix Module",
+                set = function(info, v) addon.db.profile.achievementTrackerFix = v end,
+                get = function() return addon.db.profile.achievementTrackerFix end,
+                width = "full",
+            },
             keystoneMovable = {
                 type = "toggle",
                 name = "Enable Keystone Movable Module",
                 set = function(info, v) addon.db.profile.keystoneMovable = v end,
                 get = function() return addon.db.profile.keystoneMovable end,
+                width = "full",
+            },
+            acronyms = {
+                type = "toggle",
+                name = "Enable Mythic+ Acronym Module",
+                set = function(info, v) addon.db.profile.acronyms = v end,
+                get = function() return addon.db.profile.acronyms end,
+                width = "full",
+            },
+            wardrobeClassColours = {
+                type = "toggle",
+                name = "Enable Wardrobe Class Colours Module",
+                set = function(info, v) addon.db.profile.wardrobeClassColours = v end,
+                get = function() return addon.db.profile.wardrobeClassColours end,
+                width = "full",
+            },
+            delvesProgressTooltip = {
+                type = "toggle",
+                name = "Enable Delves Progress Tooltip Module",
+                set = function(info, v) addon.db.profile.delvesProgressTooltip = v end,
+                get = function() return addon.db.profile.delvesProgressTooltip end,
+                width = "full",
+            },
+            inspectilvl = {
+                type = "toggle",
+                name = "Enable Inspect Item Level Module",
+                desc = "Adds the target's item level to the Inspect UI",
+                set = function(info, v) addon.db.profile.inspectilvl = v end,
+                get = function() return addon.db.profile.inspectilvl end,
+                width = "full",
+            },
+            premadeFinderRedX = {
+                type = "toggle",
+                name = "Enable Premade Finder Red X Module",
+                desc = "Hides that annoying Red X that appears over the Filter button but also clips over the Refresh button",
+                set = function(info, v) addon.db.profile.premadeFinderRedX = v end,
+                get = function() return addon.db.profile.premadeFinderRedX end,
                 width = "full",
             },
         },
@@ -71,4 +121,6 @@ function addon:setupOptions()
     LibStub("AceConfigRegistry-3.0"):ValidateOptionsTable(options, addonName)
     LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, options, {"mplusadventureguide"})
     LibStub("AceConfigDialog-3.0"):AddToBlizOptions(addonName)
+    
+    addon:initItemUpgradeOldSeasons()
 end

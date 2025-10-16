@@ -68,7 +68,7 @@ local db = {
         },
     },
     [248] = { -- Waycrest Manor
-        primarySpell = 272271,
+        primarySpell = 424167,
         alternateSpells = {},
     },
     [456] = { -- Throne of the Tides
@@ -76,27 +76,173 @@ local db = {
         alternateSpells = {},
     },
     [464] = { -- Dawn of the Infinite: Murozond
-        primarySpell = 426121,
+        primarySpell = 424197,
         alternateSpells = {},
     },
     [463] = { -- Dawn of the Infinite: Galakrond
-        primarySpell = 426121,
+        primarySpell = 424197,
         alternateSpells = {},
     },
     [198] = { -- Darkheart Thicket
         primarySpell = 424163,
         alternateSpells = {
-            205373, -- Black Rook Hold
+            424153, -- Black Rook Hold
         },
     },
     [199] = { -- Black Rook Hold
-        primarySpell = 205373,
+        primarySpell = 424153,
         alternateSpells = {
             424163, -- Darkheart Thicket
         },
     },
     [244] = { -- Atal'Dazar
         primarySpell = 424187,
+        alternateSpells = {
+            281404, -- Teleport: Dazar'alor
+            467553, -- The MOTHERLODE!!
+            467555, -- Also The MOTHERLODE!!
+        },
+    },
+    
+    -- Dragonflight Season 4 (just adding the dungeons from Season 1, from before this module existed)
+    [400] = { -- Nokhud Offensive
+        primarySpell = 393262,
+        alternateSpells = {},
+    },
+    [401] = { -- Azure Vault
+        primarySpell = 393279,
+        alternateSpells = {},
+    },
+    [399] = { -- Ruby Life Pools
+        primarySpell = 393256,
+        alternateSpells = {},
+    },
+    [402] = { -- Algethar Academy
+        primarySpell = 393273,
+        alternateSpells = {
+            393283, -- Halls of Infusion
+        },
+    },
+    
+    -- TWW season 1
+    [376] = { -- Necrotic Wake
+        primarySpell = 354462,
+        alternateSpells = {
+            354466, -- Spires of Ascension
+        },
+    },
+    [501] = { -- Stonevault
+        primarySpell = 445269,
+        alternateSpells = {
+            445441, -- Darkflame Cleft
+            1216786, -- Operation: Floodgate
+        },
+    },
+    [505] = { -- Dawnbreaker
+        primarySpell = 445414,
+        alternateSpells = {
+            445444, -- Priory of the Sacred Flame
+        },
+    },
+    [353] = { -- Siege of Boralus
+        primarySpell = 445418,
+        alternateSpells = {
+            464256, -- Also SOB - the other faction's one
+            272270, -- Tol Dagor
+        },
+    },
+    [375] = { -- Mists of Tirna Scythe
+        primarySpell = 354464,
+        alternateSpells = {
+            354468, -- De Other Side
+        },
+    },
+    [507] = { -- Grim Batol
+        primarySpell = 445424,
+        alternateSpells = {},
+    },
+    [502] = { -- City of Threads
+        primarySpell = 445416,
+        alternateSpells = {
+            445417, -- Ara-Kara
+        },
+    },
+    [503] = { -- Ara-Kara, City of Echoes
+        primarySpell = 445417,
+        alternateSpells = {
+            445416, -- City of Threads
+        },
+    },
+
+    -- TWW season 2
+    [506] = { -- Cinderbrew Meadery
+        primarySpell = 445440,
+        alternateSpells = {
+            446540, -- Teleport: Dornogal
+            445443, -- The Rookery
+        },
+    },
+    [247] = { -- The MOTHERLODE!!
+        primarySpell = 467553,
+        alternateSpells = {
+            467555, -- Also ML - the other faction's one
+            281404, -- Teleport: Dazar'alor
+            424187, -- Atal'Dazar
+        },
+    },
+    [500] = { -- The Rookery
+        primarySpell = 445443,
+        alternateSpells = {
+            446540, -- Teleport: Dornogal
+            445440, -- Cinderbrew Meadery
+        },
+    },
+    [382] = { -- Theater of Pain
+        primarySpell = 354467,
+        alternateSpells = {
+            354463, -- Plaguefall
+        },
+    },
+    [370] = { -- Mechagon Workshop
+        primarySpell = 373274,
+        alternateSpells = {},
+    },
+    [525] = { -- Operation: Floodgate
+        primarySpell = 1216786,
+        alternateSpells = {
+            445441, -- Darkflame Cleft
+            445269, -- Stonevault
+        },
+    },
+    [504] = { -- Darkflame Cleft
+        primarySpell = 445441,
+        alternateSpells = {
+            1216786, -- Operation: Floodgate
+            445269, -- Stonevault
+        },
+    },
+    [499] = { -- Priory of the Sacred Flame
+        primarySpell = 445444,
+        alternateSpells = {
+            445414, -- The Dawnbreaker
+        },
+    },
+    
+    -- TWW season 3
+    [391] = { -- Tazavesh part 1
+        primarySpell = 367416,
+        alternateSpells = {},
+    },
+    [392] = { -- Tazavesh part 2
+        primarySpell = 367416,
+        alternateSpells = {},
+    },
+    [378] = { -- Halls of Attonement
+        primarySpell = 354465,
+        alternateSpells = {},
+    },
+    [542] = { -- Eco-Dome Al'dani
+        primarySpell = 1237215,
         alternateSpells = {},
     },
 }
@@ -156,9 +302,10 @@ function addon:initPortalButtons()
                     local button = icon.MPAGPortalButton
                     button:SetAttribute("type", "spell")
                     button:SetAttribute("spell", spellID)
-                    local _, _, icon = GetSpellInfo(spellID)
+                    local icon = C_Spell.GetSpellInfo(spellID).iconID
                     button:SetNormalTexture(icon)
-                    local startTime, duration, _ = GetSpellCooldown(spellID)
+                    local spellCooldownInfo = C_Spell.GetSpellCooldown(spellID)
+                    local startTime, duration = spellCooldownInfo.startTime, spellCooldownInfo.duration
                     cdFrame:SetCooldown(startTime, duration)
                     button:Show()
                 end
