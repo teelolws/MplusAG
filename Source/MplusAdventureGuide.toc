@@ -46,4 +46,5 @@ warband-transferable.lua
 delves-progress-tooltip.lua
 inspect-ilvl.lua
 premade-finder-red-x.lua
+remix-infinite-power.lua
 init.lua

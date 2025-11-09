@@ -4,6 +4,7 @@ EventUtil.ContinueOnAddOnLoaded(addonName, function()
     addon:setupOptions()
     addon:initWatermark()
     addon:initAchievementTrackerFix()
+    addon:initRemixInfinitePower()
     
     RunNextFrame(function()
         EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
