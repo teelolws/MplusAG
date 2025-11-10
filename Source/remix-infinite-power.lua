@@ -34,6 +34,7 @@ function addon:initRemixInfinitePower()
                     frame:SetSize(40, 20)
                     
                     local text = frame.text or frame:CreateFontString(nil, "OVERLAY", "GameTooltipText")
+                    frame.text = text
                     text:SetPoint("CENTER")
                     text:SetText(ip)
                 end
@@ -55,6 +56,7 @@ function addon:initRemixInfinitePower()
                         frame:SetSize(40, 20)
                         
                         local text = frame.text or frame:CreateFontString(nil, "OVERLAY", "GameTooltipText")
+                        frame.text = text
                         text:SetPoint("CENTER")
                         text:SetText(ip)
                     end

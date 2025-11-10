@@ -4,9 +4,10 @@ EventUtil.ContinueOnAddOnLoaded(addonName, function()
     addon:setupOptions()
     addon:initWatermark()
     addon:initAchievementTrackerFix()
-    addon:initRemixInfinitePower()
     
     RunNextFrame(function()
+        addon:initRemixInfinitePower()
+        
         EventUtil.ContinueOnAddOnLoaded("Blizzard_ChallengesUI", function()
             addon:initPortalButtons()
             addon:initKeystoneMovable()
