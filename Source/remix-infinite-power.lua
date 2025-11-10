@@ -6,6 +6,7 @@ local THROTTLE = 2
 -- /dump AuraUtil.FindAura(function(_, _, _, ...) local _, _, _, _, _, _, _, _, _, spellId = ... return spellId == 1232454 end, "player", "HELPFUL")
 
 function addon:initRemixInfinitePower()
+    if not addon.db.profile.remixIP then return end
     if not (PlayerIsTimerunning() and (C_TimerunningUI.GetActiveTimerunningSeasonID() == 2)) then
         return
     end
