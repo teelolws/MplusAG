@@ -40,7 +40,7 @@ function addon:setupOptions()
             itemUpgradeOldSeasons = {
                 type = "toggle",
                 name = "Item Upgrade Module: include old seasons (requires /reload)",
-                set = function(info, v) addon.db.profile.itemUpgradeOldSeasons = v end,
+                set = function(_, v) addon.db.profile.itemUpgradeOldSeasons = v end,
                 get = function() return addon.db.profile.itemUpgradeOldSeasons end,
                 width = "full",
             },
