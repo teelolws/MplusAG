@@ -249,7 +249,7 @@ function addon:initItemUpgradeOldSeasons()
                     highestName = seasonName
                 end
             end
-            for seasonName, seasonData in pairs(block.seasons) do
+            for seasonName in pairs(block.seasons) do
                 if seasonName ~= highestName then
                     block.seasons[seasonName] = nil
                 end
@@ -265,14 +265,14 @@ local upgradePattern = ITEM_UPGRADE_TOOLTIP_FORMAT_STRING
 upgradePattern = upgradePattern:gsub("%%d", "%%s")
 upgradePattern = upgradePattern:format("(.+)", "(%d+)", "(%d+)")
 
-TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(tooltip, data)
+TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(_, data)
     if not addon.db then return end
     if not addon.db.profile then return end
     if not addon.db.profile.itemUpgrade then return end
     
     local found, foundLower, foundUpper, foundCurrent
     
-    for k, v in pairs(data.lines) do
+    for _, v in pairs(data.lines) do
         if type(v) == "table" then
             local text = v.leftText
             local match, _, itemLevel = text:find(itemLevelPattern)
@@ -284,15 +284,15 @@ TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(toolt
     end
     
     if not foundCurrent then return end
-    for k, v in pairs(data.lines) do
+    for _, v in pairs(data.lines) do
         if type(v) == "table" then
             local text = v.leftText
             local match, _, rank, lower, upper = text:find(upgradePattern)
             if match then
                 if lower ~= upper then
-                    for _, data in pairs(db) do
-                        if data[GetLocale()] and ((data[GetLocale()] == rank) or ((rank.." "..lower.."/"..upper):match(data[GetLocale()]))) then 
-                            for seasonName, seasonData in pairs(data.seasons) do
+                    for _, data2 in pairs(db) do
+                        if data2[GetLocale()] and ((data2[GetLocale()] == rank) or ((rank.." "..lower.."/"..upper):match(data2[GetLocale()]))) then 
+                            for _, seasonData in pairs(data2.seasons) do
                                 if (foundCurrent >= seasonData.lower) and (foundCurrent <= seasonData.upper) then
                                     found, foundLower, foundUpper = true, seasonData.lower, seasonData.upper
                                 end
@@ -307,11 +307,10 @@ TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(toolt
     end
     
     if not found then return end
-    for k, v in pairs(data.lines) do
+    for _, v in pairs(data.lines) do
         if type(v) == "table" then
-            local text = v.leftText
-            local match, _, itemLevel = text:find(itemLevelPattern)
-            if match then
+            local text = v.leftText 
+            if text:find(itemLevelPattern) then
                 v.leftText = text.." "..DISABLED_FONT_COLOR:GenerateHexColorMarkup().."("..foundLower.."-"..foundUpper..")|r"
             end
         end

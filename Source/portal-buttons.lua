@@ -257,9 +257,8 @@ function addon:initPortalButtons()
         if loaded then return end
         loaded = true
         
-        for i, icon in ipairs(ChallengesFrame.DungeonIcons) do
+        for _, icon in ipairs(ChallengesFrame.DungeonIcons) do
             local button = CreateFrame("Button", nil, icon, "SecureActionButtonTemplate")
-            icon.MPAGPortalButton = button
             button:SetPoint("BOTTOM", icon, "TOP")
             button:RegisterForClicks("LeftButtonDown", "LeftButtonUp")
             button:SetSize(40, 40)
@@ -299,7 +298,6 @@ function addon:initPortalButtons()
                         if not spellID then return end
                     end
                     
-                    local button = icon.MPAGPortalButton
                     button:SetAttribute("type", "spell")
                     button:SetAttribute("spell", spellID)
                     local icon = C_Spell.GetSpellInfo(spellID).iconID

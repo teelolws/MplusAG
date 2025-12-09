@@ -17,7 +17,7 @@ function addon:initRemixInfinitePower()
     end
     
     local function getPlayerIP(unitID)
-        local _, _, _, _, _, _, _, _, _, spellId, _, _, _, _, _, _, _, _, _, point = AuraUtil.FindAura(predicate, unitID, "HELPFUL")
+        local _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, point = AuraUtil.FindAura(predicate, unitID, "HELPFUL")
         return point
     end
     
