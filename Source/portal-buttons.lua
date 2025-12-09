@@ -299,9 +299,8 @@ function addon:initPortalButtons()
                     end
                     
                     button:SetAttribute("type", "spell")
-                    button:SetAttribute("spell", spellID)
-                    local icon = C_Spell.GetSpellInfo(spellID).iconID
-                    button:SetNormalTexture(icon)
+                    button:SetAttribute("spell", spellID) 
+                    button:SetNormalTexture(C_Spell.GetSpellInfo(spellID).iconID)
                     local spellCooldownInfo = C_Spell.GetSpellCooldown(spellID)
                     local startTime, duration = spellCooldownInfo.startTime, spellCooldownInfo.duration
                     cdFrame:SetCooldown(startTime, duration)
