@@ -16,6 +16,7 @@ function addon:setupOptions()
             inspectilvl = true,
             premadeFinderRedX = true,
             remixIP = false,
+            houseDropdownFactionIcon = true,
         },
     }
         
@@ -121,6 +122,14 @@ function addon:setupOptions()
                 name = "Enable Remix Infinite Power Module",
                 set = function(_, v) addon.db.profile.remixIP = v end,
                 get = function() return addon.db.profile.remixIP end,
+                width = "full",
+            },
+            houseDropdownFactionIcon = {
+                type = "toggle",
+                name = "Enable Housing Dashboard Dropdown Faction Icon Module",
+                desc = "Adds a Faction Icon to the Dropdown so you know which house belongs to which faction",
+                set = function(_, v) addon.db.profile.houseDropdownFactionIcon = v end,
+                get = function() return addon.db.profile.houseDropdownFactionIcon end,
                 width = "full",
             },
         },
