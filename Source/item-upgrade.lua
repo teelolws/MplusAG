@@ -14,6 +14,7 @@ local db = {
         zhTW = "探險者",
         zhCN = "探索者",
         seasons = {
+            --[[
             season2 = {
                 lower = 376,
                 upper = 398,
@@ -34,6 +35,7 @@ local db = {
                 lower = 597,
                 upper = 619,
             },
+            --]]
             TWWseason3 = {
                 lower = 642,
                 upper = 665,
@@ -53,6 +55,7 @@ local db = {
         zhTW = "冒險者",
         zhCN = "冒险者",
         seasons = {
+            --[[
             season2 = {
                 lower = 389,
                 upper = 411,
@@ -73,6 +76,7 @@ local db = {
                 lower = 610,
                 upper = 632,
             },
+            --]]
             TWWseason3 = {
                 lower = 655,
                 upper = 678,
@@ -92,6 +96,7 @@ local db = {
         zhTW = "精兵",
         zhCN = "老兵",
         seasons = {
+            --[[
             season2 = {
                 lower = 402,
                 upper = 424,
@@ -112,6 +117,7 @@ local db = {
                 lower = 623,
                 upper = 645,
             },
+            --]]
             TWWseason3 = {
                 lower = 668,
                 upper = 691,
@@ -131,6 +137,7 @@ local db = {
         zhTW = "勇士",
         zhCN = "勇士",
         seasons = {
+            --[[
             season2 = {
                 lower = 415,
                 upper = 437,
@@ -151,9 +158,10 @@ local db = {
                 lower = 636,
                 upper = 658,
             },
+            --]]
             TWWseason3 = {
-                lower = 681,
-                upper = 704,
+                lower = 121,
+                upper = 144,
             },
         },
     },
@@ -162,6 +170,7 @@ local db = {
         zhTW = "英雄",
         zhCN = "英雄",
         seasons = {
+            --[[
             season2 = {
                 lower = 428,
                 upper = 441,
@@ -182,9 +191,10 @@ local db = {
                 lower = 649,
                 upper = 671,
             },
+            --]]
             TWWseason3 = {
-                lower = 694,
-                upper = 717,
+                lower = 134,
+                upper = 157,
             },
         },
     },
@@ -193,6 +203,7 @@ local db = {
         zhTW = "神話",
         zhCN = "神话",
         seasons = {
+            --[[
             season2 = {
                 lower = 441,
                 upper = 447,
@@ -213,28 +224,33 @@ local db = {
                 lower = 662,
                 upper = 684,
             },
+            --]]
             TWWseason3 = {
-                lower = 707,
-                upper = 730,
+                lower = 147,
+                upper = 170,
             },
         },
     },
     awakened12 = {
         enUS = "Awakened (%d+)/12",
         seasons = {
+            --[[
             season4 = {
                 lower = 493,
                 upper = 528,
             },
+            --]]
         },
     },
     awakened14 = {
         enUS = "Awakened (%d+)/14",
         seasons = {
+            --[[
             season4 = {
                 lower = 493,
                 upper = 535,
             },
+            --]]
         },
     },
 }
