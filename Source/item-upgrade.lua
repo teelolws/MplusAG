@@ -37,8 +37,8 @@ local db = {
             },
             --]]
             TWWseason3 = {
-                lower = 642,
-                upper = 665,
+                lower = 98,
+                upper = 105,
             },
         },
     },
@@ -78,8 +78,8 @@ local db = {
             },
             --]]
             TWWseason3 = {
-                lower = 655,
-                upper = 678,
+                lower = 102,
+                upper = 118,
             },
         },
     },
@@ -119,8 +119,8 @@ local db = {
             },
             --]]
             TWWseason3 = {
-                lower = 668,
-                upper = 691,
+                lower = 108,
+                upper = 131,
             },
         },
     },
