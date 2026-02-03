@@ -47,4 +47,5 @@ inspect-ilvl.lua
 premade-finder-red-x.lua
 remix-infinite-power.lua
 house-dropdown-faction-icon.lua
+april-fools.lua
 init.lua
