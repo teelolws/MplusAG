@@ -285,7 +285,8 @@ upgradePattern = upgradePattern:format("(.+)", "(%d+)", "(%d+)")
 -- Item Level ###
 -- Upgrade Level: Myth 1/8
 -- Because we have to check across two lines, we cannot use AddLinePreCall
-TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(_, data)
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
+    if not tooltip:GetName() then return end
     if not addon.db then return end
     if not addon.db.profile then return end
     if not addon.db.profile.itemUpgrade then return end
@@ -337,7 +338,7 @@ TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(_, d
                 local newText = text.." "..DISABLED_FONT_COLOR:GenerateHexColorMarkup().."("..foundLower.."-"..foundUpper..")|r"
                 local i = 1
                 while (true) do
-                    local line = _G["GameTooltipTextLeft"..i]
+                    local line = _G[tooltip:GetName().."TextLeft"..i]
                     if not line then break end
                     if line:GetText() == text then
                         line:SetText(newText)
