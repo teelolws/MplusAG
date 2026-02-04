@@ -281,13 +281,18 @@ local upgradePattern = ITEM_UPGRADE_TOOLTIP_FORMAT_STRING
 upgradePattern = upgradePattern:gsub("%%d", "%%s")
 upgradePattern = upgradePattern:format("(.+)", "(%d+)", "(%d+)")
 
-TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(_, data)
+-- Tooltips are, by default, written in this format, across two lines:
+-- Item Level ###
+-- Upgrade Level: Myth 1/8
+-- Because we have to check across two lines, we cannot use AddLinePreCall
+TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(_, data)
     if not addon.db then return end
     if not addon.db.profile then return end
     if not addon.db.profile.itemUpgrade then return end
     
     local found, foundLower, foundUpper, foundCurrent
     
+    -- Find the current item level of the item based on the item level line
     for _, v in pairs(data.lines) do
         if type(v) == "table" then
             local text = v.leftText
@@ -300,6 +305,8 @@ TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(_, da
     end
     
     if not foundCurrent then return end
+    
+    -- Based on the upgrade level line, determine which known min/max applies
     for _, v in pairs(data.lines) do
         if type(v) == "table" then
             local text = v.leftText
@@ -327,7 +334,17 @@ TooltipDataProcessor.AddTooltipPreCall(Enum.TooltipDataType.Item, function(_, da
         if type(v) == "table" then
             local text = v.leftText 
             if text:find(itemLevelPattern) then
-                v.leftText = text.." "..DISABLED_FONT_COLOR:GenerateHexColorMarkup().."("..foundLower.."-"..foundUpper..")|r"
+                local newText = text.." "..DISABLED_FONT_COLOR:GenerateHexColorMarkup().."("..foundLower.."-"..foundUpper..")|r"
+                local i = 1
+                while (true) do
+                    local line = _G["GameTooltipTextLeft"..i]
+                    if not line then break end
+                    if line:GetText() == text then
+                        line:SetText(newText)
+                        break
+                    end
+                    i = i + 1
+                end
             end
         end
     end
