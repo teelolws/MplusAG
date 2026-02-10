@@ -81,6 +81,10 @@ local db = {
                 lower = 102,
                 upper = 118,
             },
+            noonSeason1 = {
+                lower = 220,
+                upper = 237,
+            },
         },
     },
     veteran = {
@@ -121,6 +125,10 @@ local db = {
             TWWseason3 = {
                 lower = 108,
                 upper = 131,
+            },
+            noonSeason1 = {
+                lower = 233,
+                upper = 250,
             },
         },
     },
@@ -163,6 +171,10 @@ local db = {
                 lower = 121,
                 upper = 144,
             },
+            noonSeason1 = {
+                lower = 246,
+                upper = 263,
+            },
         },
     },
     hero = {
@@ -196,6 +208,10 @@ local db = {
                 lower = 134,
                 upper = 157,
             },
+            noonSeason1 = {
+                lower = 259,
+                upper = 276,
+            },
         },
     },
     myth = {
@@ -228,6 +244,10 @@ local db = {
             TWWseason3 = {
                 lower = 147,
                 upper = 170,
+            },
+            noonSeason1 = {
+                lower = 272,
+                upper = 289,
             },
         },
     },
