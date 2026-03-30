@@ -33,6 +33,10 @@ libs\AceConsole-3.0\AceConsole-3.0.xml
 libs\AceGUI-3.0\AceGUI-3.0.xml
 libs\AceConfig-3.0\AceConfig-3.0.xml
 
+locales\enUS.lua
+locales\zhTW.lua
+locales\zhCN.lua
+
 options.lua
 item-upgrade.lua
 watermark.lua
