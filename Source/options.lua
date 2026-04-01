@@ -12,7 +12,6 @@ function addon:setupOptions()
             keystoneMovable = true,
             acronyms = false,
             wardrobeClassColours = true,
-            delvesProgressTooltip = true,
             inspectilvl = true,
             premadeFinderRedX = true,
             houseDropdownFactionIcon = true,
@@ -91,13 +90,6 @@ function addon:setupOptions()
                 name = "Enable Wardrobe Class Colours Module",
                 set = function(_, v) addon.db.profile.wardrobeClassColours = v end,
                 get = function() return addon.db.profile.wardrobeClassColours end,
-                width = "full",
-            },
-            delvesProgressTooltip = {
-                type = "toggle",
-                name = "Enable Delves Progress Tooltip Module",
-                set = function(_, v) addon.db.profile.delvesProgressTooltip = v end,
-                get = function() return addon.db.profile.delvesProgressTooltip end,
                 width = "full",
             },
             inspectilvl = {
