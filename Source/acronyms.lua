@@ -46,7 +46,7 @@ local mapToAcronym = {
     [558] = "MT",
     
     -- Noon season 2
-    [585] = "VS",
+    [585] = "VSA",
     [588] = "AOF",
     [586] = "DEN",
     [249] = "KR",
