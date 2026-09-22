@@ -12,8 +12,4 @@ function addon:initAchievementExpansionFeatures()
     -- This bar is finally being used, but is currently anchored differently from the rest
     AchievementFrameSummaryCategoriesCategory11:ClearAllPoints()
     AchievementFrameSummaryCategoriesCategory11:SetPoint("TOPLEFT", AchievementFrameSummaryCategoriesCategory9, "BOTTOMLEFT", 0, -10)
-    
-    -- This is Remix: Pandaria
-    -- There is no longer enough room to show this one, and it will probably get removed next patch anyway.
-    --table.insert(ACHIEVEMENTUI_SUMMARYCATEGORIES, 15509)
 end

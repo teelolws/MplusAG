@@ -14,6 +14,7 @@ function addon:setupOptions()
             wardrobeClassColours = true,
             inspectilvl = true,
             houseDropdownFactionIcon = true,
+            achievementHeaderDetailsRemoval = true,
         },
     }
         
@@ -105,6 +106,14 @@ function addon:setupOptions()
                 desc = "Adds a Faction Icon to the Dropdown so you know which house belongs to which faction",
                 set = function(_, v) addon.db.profile.houseDropdownFactionIcon = v end,
                 get = function() return addon.db.profile.houseDropdownFactionIcon end,
+                width = "full",
+            },
+            achievementHeaderDetailsRemoval = {
+                type = "toggle",
+                name = "Enable Achievement Header Details Module",
+                desc = "Moves the Back and Search features to somewhere out of the way to free up space to show more achievements, restoring the old layout",
+                set = function(_, v) addon.db.profile.achievementHeaderDetailsRemoval = v end,
+                get = function() return addon.db.profile.achievementHeaderDetailsRemoval end,
                 width = "full",
             },
         },

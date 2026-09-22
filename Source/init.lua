@@ -13,6 +13,7 @@ EventUtil.ContinueOnAddOnLoaded(addonName, function()
         end)
         
         EventUtil.ContinueOnAddOnLoaded("Blizzard_AchievementUI", addon.initAchievementExpansionFeatures)
+        EventUtil.ContinueOnAddOnLoaded("Blizzard_AchievementUI", addon.initAchievementHeaderDetails)
         EventUtil.ContinueOnAddOnLoaded("Blizzard_Collections", addon.initWardrobeClassColours)
         EventUtil.ContinueOnAddOnLoaded("Blizzard_InspectUI", addon.initInspectIlvl)
         EventUtil.ContinueOnAddOnLoaded("Blizzard_HousingDashboard", addon.initHouseDropdownFactionIcon)
