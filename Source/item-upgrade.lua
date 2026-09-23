@@ -326,6 +326,7 @@ upgradePattern = upgradePattern:format("(.+)", "(%d+)", "(%d+)")
 -- Upgrade Level: Myth 1/8
 -- Because we have to check across two lines, we cannot use AddLinePreCall
 TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, function(tooltip, data)
+    if tooltip:IsForbidden() then return end
     if not tooltip:GetName() then return end
     if not addon.db then return end
     if not addon.db.profile then return end
